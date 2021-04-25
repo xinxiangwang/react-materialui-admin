@@ -4,11 +4,12 @@ import ListItemLink from './components/ListItemLink'
 import AppMain from './components/AppMain'
 
 
-export default function Layout() {
+export default function Layout(props: any, state: any) {
   const [open, setOpen] = useState(true)
   const handleClick = (): void => {
     setOpen(!open)
   }
+  console.log(props, state)
   return (
     <>
       <List component="nav">

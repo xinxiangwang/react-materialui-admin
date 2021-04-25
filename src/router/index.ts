@@ -1,7 +1,7 @@
 import Layout from '@/layout'
-import { RouteProps } from 'react-router-dom'
 import Dashboard from '@/pages/dashboard'
 import Nested from '@/pages/nested'
+import NotFound from '@/pages/404'
 
 interface MetaInfo {
   roles?: Array<string>
@@ -11,9 +11,14 @@ interface MetaInfo {
   activeMenu?: string
 }
 
-export interface RoutesConfig extends RouteProps {
+export interface RoutesConfig {
   key?: string | number
   meta?: MetaInfo
+  path: string
+  exact?: boolean
+  strict?: boolean
+  component: React.ComponentType
+  children?: Array<RoutesConfig>
 }
 
 const routes: Array<RoutesConfig> = [
@@ -31,6 +36,10 @@ const routes: Array<RoutesConfig> = [
         component: Nested
       }
     ]
+  },
+  {
+    path: '/login',
+    component: NotFound
   }
 ]
 export default routes

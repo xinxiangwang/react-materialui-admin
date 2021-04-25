@@ -12,7 +12,6 @@ export default function ListItemLink(props: any) {
   ), [to])
   return (
     <li>
-      { console.log("菜单渲染") }
       <ListItem button component={CustomLink}>
         <ListItemText primary={primary}></ListItemText>
       </ListItem>
