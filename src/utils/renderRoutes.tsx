@@ -1,9 +1,9 @@
 import React from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import { RoutesConfig } from '@/router'
 
 const renderRoutes = (routes: Array<RoutesConfig>, authed: boolean, authPath: string = '/login', extraProps: any = {}, switchProps = {}) => routes ? (
-  <Switch { ...switchProps }>
+  <>
     {
       routes.map((route, i) => (
         <Route
@@ -12,7 +12,7 @@ const renderRoutes = (routes: Array<RoutesConfig>, authed: boolean, authPath: st
           exact={route.exact}
           strict={route.strict}
           render={(props) => {
-            if (!route.meta?.roles || authed) {
+            if (!route.roles || authed || route.path === authPath) {
               return <route.component { ...props } { ...extraProps } route={route} />
             }
             return <Redirect to={{ pathname: authPath, state: { from: props.location } }} />
@@ -20,7 +20,7 @@ const renderRoutes = (routes: Array<RoutesConfig>, authed: boolean, authPath: st
         />
       ))
     }
-  </Switch>
+  </>
 ) : null
 
 export default renderRoutes
