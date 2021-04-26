@@ -3,6 +3,7 @@ import Dashboard from '@/pages/dashboard'
 import { menu1_1, menu1_2, menu1_3, menu2, menu1 } from '@/pages/nested'
 import NotFound from '@/pages/404'
 import Login from '@/pages/login'
+import { RouteComponentProps } from 'react-router-dom'
 
 interface MetaInfo {
   title?: string
@@ -17,40 +18,59 @@ export interface RoutesConfig {
   path: string
   exact?: boolean
   strict?: boolean
-  component?: React.ComponentType
+  component: React.ComponentType<RouteComponentProps>
   children?: Array<RoutesConfig>
   roles?: Array<string>
+  hidden?: boolean
 }
 
 const asyncRoutes: Array<RoutesConfig> = [
   {
     path: '/dashboard',
     component: Dashboard,
-    roles: ['admin']
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard'
+    }
   },
   {
     path: '/nested/menu1',
     roles: ['admin'],
     component: menu1,
+    meta: {
+      title: 'nested'
+    },
     children: [
       {
         path: 'menu1-1',
-        component: menu1_1
+        component: menu1_1,
+        meta: {
+          title: 'menu1_1'
+        }
       },
       {
         path: 'menu1-2',
-        component: menu1_2
+        component: menu1_2,
+        meta: {
+          title: 'menu1_2'
+        }
       },
       {
         path: 'menu1-3',
-        component: menu1_3
+        component: menu1_3,
+        meta: {
+          title: 'menu1_3'
+        }
       }
     ]
   },
   {
     path: '/nested/menu2',
     roles: ['admin'],
-    component: menu2
+    component: menu2,
+    meta: {
+      title: 'menu2'
+    }
   },
   
 ]

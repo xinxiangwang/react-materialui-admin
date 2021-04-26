@@ -1,14 +1,27 @@
 import React from 'react'
-import renderRoutes from '@/utils/renderRoutes'
-import { Redirect } from 'react-router-dom'
+// import renderRoutes from '@/utils/renderRoutes'
+import { Route } from 'react-router-dom'
 import { asyncRoutes } from '@/router'
+import routesFlat from '@/utils/routesFalt'
+
 
 const AppMain: React.FC = () => {
+  const routes = routesFlat(asyncRoutes)
+  console.log(routes)
   return (
-    <>
-      { renderRoutes(asyncRoutes, true) }
-      <Redirect to='/dashboard' from='/' />
-    </>
+    <div className="app-main">
+      { routes.map((route, i) => (
+        <Route
+          key={route.key || i}
+          path={route.path}
+          exact={route.exact}
+          strict={route.strict}
+          render={(props) => (
+            <route.component {...props} />
+          )}
+        />
+      )) }
+    </div>
   )
 }
 

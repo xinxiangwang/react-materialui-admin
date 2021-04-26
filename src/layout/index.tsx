@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
-import { List, Collapse, ListItem, ListItemText } from "@material-ui/core"
-import ListItemLink from './components/ListItemLink'
-import AppMain from './components/AppMain'
+import { List, Collapse } from '@material-ui/core'
+import { AppMain, SubList } from './components/index'
+import { asyncRoutes, RoutesConfig } from '@/router'
+import { Route } from 'react-router'
 
+const RecursionList = (routes: Array<RoutesConfig>) => {
+  const listResult: Array<RoutesConfig> = []
+  let pathJoin = (path: string) => path.startsWith('/') ? '' : '/'
+  routes.forEach(route => {
+    
+  })
+}
 
-export default function Layout(props: any, state: any) {
-  const [open, setOpen] = useState(true)
-  const handleClick = (): void => {
-    setOpen(!open)
-  }
-  console.log('layout渲染')
+const Layout: React.FC = () => {
   return (
-    <>
-      <List component="nav">
+    <List component="nav">
+      { asyncRoutes.map(route => (<SubList key={route.path} item={route} basePath={route.path} />)) }
+      {/* <List component="nav">
         <ListItemLink primary="dashboard" to="/dashboard"></ListItemLink>
-        <ListItem button onClick={handleClick}>
-          <ListItemText primary="nested"></ListItemText>
-        </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <SubList primary="nested">
           <List component="div">
             <ListItemLink primary="menu1" to="/nested/menu1">
             <Collapse in={true} timeout="auto" unmountOnExit>
@@ -30,10 +31,12 @@ export default function Layout(props: any, state: any) {
             </ListItemLink>
             <ListItemLink primary="menu2" to="/nested/menu2"></ListItemLink>
           </List>
-        </Collapse>
-      </List>
+        </SubList>
+      </List> */}
       <AppMain/>
-    </>
+    </List>
     
   )
 }
+
+export default Layout

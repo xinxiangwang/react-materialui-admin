@@ -1,8 +1,12 @@
-import { Link } from 'react-router-dom'
+import { Link, LinkProps } from 'react-router-dom'
 import { ListItem, ListItemText } from '@material-ui/core'
 import { useMemo, forwardRef } from 'react'
 
-export default function ListItemLink(props: any) {
+interface ListItemLinkProps extends LinkProps {
+  primary: React.ReactNode
+}
+
+const ListItemLink: React.FC<ListItemLinkProps> = (props) => {
   const { primary, to } = props
   // const CustomLink = (props: any) => <Link to={to} {...props} />
   const CustomLink = useMemo(() => forwardRef<HTMLAnchorElement, {}>(
@@ -18,3 +22,5 @@ export default function ListItemLink(props: any) {
     </li>
   )
 }
+
+export default ListItemLink
