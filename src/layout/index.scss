@@ -1,0 +1,64 @@
+$headerWrapperHeight: 64px;
+$navWrapperWidth: 279px !important;
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgb(244, 245, 247);
+
+  .header-wrapper {
+    width: 100%;
+    background-color: pink;
+    position: fixed;
+    top: 0;
+    left: auto;
+    right: 0;
+    box-sizing: border-box;
+    height: $headerWrapperHeight;
+    z-index: 999;
+    flex-shrink: 0;
+  }
+
+  .body-wrapper {
+    display: flex;
+    flex: 1;
+    flex-basis: auto;
+    flex-direction: row;
+    box-sizing: border-box;
+    .nav-wrapper {
+      box-sizing: border-box;
+      padding: 16px;
+      padding-top: $headerWrapperHeight;
+      background-color: #fff;
+      width: $navWrapperWidth;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 899;
+      overflow: hidden;
+
+      .MuiListItem-button {
+        font-weight: 700;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+
+      .MuiListItem-button:hover {
+        border-radius: 16px;
+        background-color: rgba(86, 100, 210, 0.04);
+        cursor: pointer;
+      }
+    }
+    .app-main {
+      flex: 1;
+      flex-basis: auto;
+      box-sizing: border-box;
+      padding-top: $headerWrapperHeight;
+      padding-left: $navWrapperWidth;
+    }
+  }
+}
+

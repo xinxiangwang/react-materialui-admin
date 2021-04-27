@@ -62,19 +62,19 @@ const SubList: React.FC<SubListProps> = (props) => {
         <>
           { hasOneShowingChild(item.children, item, onlyOneChild) &&
             (!onlyOneChild.children || onlyOneChild.noShowingChildren) ?
-            <ListItemLink primary={item.meta?.title} to={resolvePath('', basePath)} /> :
+            <ListItemLink color="red" primary={item.meta?.title} to={resolvePath('', basePath)} /> :
             <>
               <ListItem button onClick={handleClick}>
                 <ListItemText primary={item.meta?.title} />
               </ListItem>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                {/* <List component="div"> */}
+                <List component="div">
                   {
                     item.children?.map((child, index) => (
                       <SubList key={index} item={child} basePath={resolvePath(child.path, basePath)} />
                     ))
                   }
-                {/* </List> */}
+                </List>
               </Collapse>
             </>
           }

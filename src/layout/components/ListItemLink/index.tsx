@@ -15,11 +15,9 @@ const ListItemLink: React.FC<ListItemLinkProps> = (props) => {
     )
   ), [to])
   return (
-    <li>
-      <ListItem button component={CustomLink}>
-        <ListItemText primary={primary}></ListItemText>
-      </ListItem>
-    </li>
+    <ListItem button component={CustomLink}>
+      <ListItemText primary={primary}></ListItemText>
+    </ListItem>
   )
 }
 
