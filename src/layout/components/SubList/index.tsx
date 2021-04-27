@@ -40,6 +40,7 @@ const resolvePath = (routePath: string, basePath: string): string => {
   if (isExternal(basePath)) {
     return basePath
   }
+  console.log(basePath, routePath)
   return path.resolve(basePath, routePath)
 }
 
@@ -61,22 +62,24 @@ const SubList: React.FC<SubListProps> = (props) => {
         <>
           { hasOneShowingChild(item.children, item, onlyOneChild) &&
             (!onlyOneChild.children || onlyOneChild.noShowingChildren) ?
-            <ListItemLink primary={item.meta?.title} to={item.path}></ListItemLink> :
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <ListItemLink primary={item.meta?.title} to={resolvePath('', basePath)} /> :
+            <>
               <ListItem button onClick={handleClick}>
-                <ListItemText primary={item.meta?.title}></ListItemText>
+                <ListItemText primary={item.meta?.title} />
               </ListItem>
-              <List component="div">
-                {
-                  item.children?.map((child, index) => (
-                    <SubList key={index} item={child} basePath={resolvePath(child.path, basePath)} />
-                  ))
-                }
-              </List>
-            </Collapse>
-            
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                {/* <List component="div"> */}
+                  {
+                    item.children?.map((child, index) => (
+                      <SubList key={index} item={child} basePath={resolvePath(child.path, basePath)} />
+                    ))
+                  }
+                {/* </List> */}
+              </Collapse>
+            </>
           }
-        </> : null
+        </> :
+      null
   )
 }
 

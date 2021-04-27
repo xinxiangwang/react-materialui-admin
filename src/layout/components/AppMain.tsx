@@ -17,7 +17,7 @@ const AppMain: React.FC = () => {
           exact={route.exact}
           strict={route.strict}
           render={(props) => (
-            <route.component {...props} />
+            route.component ? <route.component {...props} /> : null
           )}
         />
       )) }

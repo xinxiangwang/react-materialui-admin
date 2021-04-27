@@ -18,7 +18,7 @@ export interface RoutesConfig {
   path: string
   exact?: boolean
   strict?: boolean
-  component: React.ComponentType<RouteComponentProps>
+  component?: React.ComponentType<RouteComponentProps>
   children?: Array<RoutesConfig>
   roles?: Array<string>
   hidden?: boolean
@@ -34,45 +34,54 @@ const asyncRoutes: Array<RoutesConfig> = [
     }
   },
   {
-    path: '/nested/menu1',
+    path: '/nested',
     roles: ['admin'],
-    component: menu1,
     meta: {
       title: 'nested'
     },
     children: [
       {
-        path: 'menu1-1',
-        component: menu1_1,
+        path: 'menu1',
+        roles: ['admin'],
+        component: menu1,
         meta: {
-          title: 'menu1_1'
-        }
+          title: 'menu1'
+        },
+        children: [
+          {
+            path: 'menu1-1',
+            component: menu1_1,
+            exact: true,
+            meta: {
+              title: 'menu1_1'
+            }
+          },
+          {
+            path: 'menu1-2',
+            component: menu1_2,
+            meta: {
+              title: 'menu1_2'
+            }
+          },
+          {
+            path: 'menu1-3',
+            component: menu1_3,
+            meta: {
+              title: 'menu1_3'
+            }
+          }
+        ]
       },
       {
-        path: 'menu1-2',
-        component: menu1_2,
+        path: 'menu2',
+        roles: ['admin'],
+        component: menu2,
         meta: {
-          title: 'menu1_2'
-        }
-      },
-      {
-        path: 'menu1-3',
-        component: menu1_3,
-        meta: {
-          title: 'menu1_3'
+          title: 'menu2'
         }
       }
     ]
-  },
-  {
-    path: '/nested/menu2',
-    roles: ['admin'],
-    component: menu2,
-    meta: {
-      title: 'menu2'
-    }
-  },
-  
+  }
 ]
 
 const constantRoutes: Array<RoutesConfig> = [
