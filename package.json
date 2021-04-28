@@ -12,6 +12,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
+    "better-scroll": "^2.3.0",
     "customize-cra": "^1.0.0",
     "http-proxy-middleware": "^1.2.0",
     "postcss-normalize": "^9.0.0",
