@@ -8,6 +8,10 @@ import path from 'path'
 interface SubListProps {
   item: RoutesConfig
   basePath: string
+  /**
+   * better-scroll refresh
+   */
+  scRefresh: () => void
 }
 
 interface OneChild extends RoutesConfig {
@@ -45,7 +49,9 @@ const resolvePath = (routePath: string, basePath: string): string => {
 }
 
 const SubList: React.FC<SubListProps> = (props) => {
-  const { item, basePath } = props
+  const { item, basePath, scRefresh } = props
+
+  const [open, setOpen] = useState(true)
 
   var onlyOneChild: OneChild = {
     ...item,
@@ -53,9 +59,16 @@ const SubList: React.FC<SubListProps> = (props) => {
     noShowingChildren: true
   }
 
-  const [open, setOpen] = useState(true)
+  const CollapseOpenTime = 300
+
   const handleClick = (): void => {
     setOpen(!open)
+
+    // open collapse，scroll content height has changed， so refresh better-scroll
+    setTimeout(() => {
+      scRefresh()
+    }, CollapseOpenTime)
+    
   }
   return (
       !item.hidden ?
@@ -67,11 +80,11 @@ const SubList: React.FC<SubListProps> = (props) => {
               <ListItem button onClick={handleClick}>
                 <ListItemText primary={item.meta?.title} />
               </ListItem>
-              <Collapse in={open} timeout="auto" unmountOnExit>
+              <Collapse in={open} timeout={CollapseOpenTime} unmountOnExit>
                 <List component="div">
                   {
                     item.children?.map((child, index) => (
-                      <SubList key={index} item={child} basePath={resolvePath(child.path, basePath)} />
+                      <SubList scRefresh={scRefresh} key={index} item={child} basePath={resolvePath(child.path, basePath)} />
                     ))
                   }
                 </List>

@@ -27,23 +27,22 @@ $navWrapperWidth: 279px !important;
     flex-basis: auto;
     flex-direction: row;
     box-sizing: border-box;
+    padding-top: $headerWrapperHeight;
+    height: 100%;
+
 
     .scroll-wrapper {
       overflow: hidden;
       height: 100%;
       width: $navWrapperWidth;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
       z-index: 899;
+      position: relative;
+      background-color: #fff;
     }
 
     .nav-wrapper {
       box-sizing: border-box;
       padding: 16px;
-      padding-top: $headerWrapperHeight;
-      background-color: #fff;
       width: 100%;
 
       .MuiListItem-button {
@@ -61,8 +60,6 @@ $navWrapperWidth: 279px !important;
       flex: 1;
       flex-basis: auto;
       box-sizing: border-box;
-      padding-top: $headerWrapperHeight;
-      padding-left: $navWrapperWidth;
     }
   }
 }
