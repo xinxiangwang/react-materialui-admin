@@ -4,10 +4,11 @@ import { menu1_1, menu1_2, menu1_3, menu2, menu1 } from '@/pages/nested'
 import NotFound from '@/pages/404'
 import Login from '@/pages/login'
 import { RouteComponentProps } from 'react-router-dom'
+import { LineStyle, SvgIconComponent, Dashboard as DashboardIcon } from '@material-ui/icons'
 
 interface MetaInfo {
   title?: string
-  icon?: string
+  icon?: string | SvgIconComponent
   breadcrum?: boolean
   activeMenu?: string
 }
@@ -30,20 +31,23 @@ const asyncRoutes: Array<RoutesConfig> = [
     component: Dashboard,
     roles: ['admin'],
     meta: {
-      title: 'dashboard'
+      title: 'dashboard',
+      icon: DashboardIcon
     }
   },
   {
     path: '/nested',
     roles: ['admin'],
     meta: {
-      title: 'nested'
+      title: 'nested',
+      icon: LineStyle
     },
     children: [
       {
         path: 'menu1',
         roles: ['admin'],
         component: menu1,
+        exact: true,
         meta: {
           title: 'menu1'
         },
@@ -51,252 +55,6 @@ const asyncRoutes: Array<RoutesConfig> = [
           {
             path: 'menu1-1',
             component: menu1_1,
-            exact: true,
-            meta: {
-              title: 'menu1_1'
-            }
-          },
-          {
-            path: 'menu1-2',
-            component: menu1_2,
-            meta: {
-              title: 'menu1_2'
-            }
-          },
-          {
-            path: 'menu1-3',
-            component: menu1_3,
-            meta: {
-              title: 'menu1_3'
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        roles: ['admin'],
-        component: menu2,
-        meta: {
-          title: 'menu2'
-        }
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    roles: ['admin'],
-    meta: {
-      title: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        roles: ['admin'],
-        component: menu1,
-        meta: {
-          title: 'menu1'
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            component: menu1_1,
-            exact: true,
-            meta: {
-              title: 'menu1_1'
-            }
-          },
-          {
-            path: 'menu1-2',
-            component: menu1_2,
-            meta: {
-              title: 'menu1_2'
-            }
-          },
-          {
-            path: 'menu1-3',
-            component: menu1_3,
-            meta: {
-              title: 'menu1_3'
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        roles: ['admin'],
-        component: menu2,
-        meta: {
-          title: 'menu2'
-        }
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    roles: ['admin'],
-    meta: {
-      title: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        roles: ['admin'],
-        component: menu1,
-        meta: {
-          title: 'menu1'
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            component: menu1_1,
-            exact: true,
-            meta: {
-              title: 'menu1_1'
-            }
-          },
-          {
-            path: 'menu1-2',
-            component: menu1_2,
-            meta: {
-              title: 'menu1_2'
-            }
-          },
-          {
-            path: 'menu1-3',
-            component: menu1_3,
-            meta: {
-              title: 'menu1_3'
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        roles: ['admin'],
-        component: menu2,
-        meta: {
-          title: 'menu2'
-        }
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    roles: ['admin'],
-    meta: {
-      title: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        roles: ['admin'],
-        component: menu1,
-        meta: {
-          title: 'menu1'
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            component: menu1_1,
-            exact: true,
-            meta: {
-              title: 'menu1_1'
-            }
-          },
-          {
-            path: 'menu1-2',
-            component: menu1_2,
-            meta: {
-              title: 'menu1_2'
-            }
-          },
-          {
-            path: 'menu1-3',
-            component: menu1_3,
-            meta: {
-              title: 'menu1_3'
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        roles: ['admin'],
-        component: menu2,
-        meta: {
-          title: 'menu2'
-        }
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    roles: ['admin'],
-    meta: {
-      title: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        roles: ['admin'],
-        component: menu1,
-        meta: {
-          title: 'menu1'
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            component: menu1_1,
-            exact: true,
-            meta: {
-              title: 'menu1_1'
-            }
-          },
-          {
-            path: 'menu1-2',
-            component: menu1_2,
-            meta: {
-              title: 'menu1_2'
-            }
-          },
-          {
-            path: 'menu1-3',
-            component: menu1_3,
-            meta: {
-              title: 'menu1_3'
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        roles: ['admin'],
-        component: menu2,
-        meta: {
-          title: 'menu2'
-        }
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    roles: ['admin'],
-    meta: {
-      title: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        roles: ['admin'],
-        component: menu1,
-        meta: {
-          title: 'menu1'
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            component: menu1_1,
-            exact: true,
             meta: {
               title: 'menu1_1'
             }

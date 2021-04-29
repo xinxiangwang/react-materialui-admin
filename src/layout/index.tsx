@@ -19,18 +19,17 @@ const Layout: React.FC = () => {
         scrollbar: true,
         mouseWheel: true,
         probeType: 3,
-        useTransition: false,
-        eventPassthrough: 'h'
+        bounce: false
       })
     }
   })
-  
+
   return (
     <div className="layout-wrapper">
       <header className="header-wrapper"></header>
       <section className="body-wrapper">
         <div ref={scrollEL} className="scroll-wrapper">
-          <List component="nav" className="nav-wrapper">
+          <List className={"nav-wrapper"} component="nav">
             { asyncRoutes.map(route => (<SubList scRefresh={scRefresh} key={route.path} item={route} basePath={route.path} />)) }
           </List>
         </div>

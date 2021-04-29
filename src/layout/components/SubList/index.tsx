@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { List, Collapse, ListItem, ListItemText } from '@material-ui/core'
-import { RoutesConfig, asyncRoutes } from '@/router'
+import { RoutesConfig } from '@/router'
 import { isExternal } from '@/utils/validate'
 import { ListItemLink } from '../index'
 import path from 'path'
+import { ChevronRight } from '@material-ui/icons'
+import { ExpandMore } from '@material-ui/icons'
 
 interface SubListProps {
   item: RoutesConfig
@@ -75,10 +77,14 @@ const SubList: React.FC<SubListProps> = (props) => {
         <>
           { hasOneShowingChild(item.children, item, onlyOneChild) &&
             (!onlyOneChild.children || onlyOneChild.noShowingChildren) ?
-            <ListItemLink color="red" primary={item.meta?.title} to={resolvePath('', basePath)} /> :
+            <ListItemLink primary={item.meta?.title} to={resolvePath('', basePath)} >
+              { item.meta?.icon ? <item.meta.icon /> : null }
+            </ListItemLink> :
             <>
               <ListItem button onClick={handleClick}>
-                <ListItemText primary={item.meta?.title} />
+                { item.meta?.icon ? <item.meta.icon /> : null }
+                <ListItemText color="primary" primary={item.meta?.title} />
+                { open ? <ExpandMore /> : <ChevronRight /> }
               </ListItem>
               <Collapse in={open} timeout={CollapseOpenTime} unmountOnExit>
                 <List component="div">
