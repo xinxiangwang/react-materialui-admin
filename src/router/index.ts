@@ -49,15 +49,37 @@ const asyncRoutes: Array<RoutesConfig> = [
         component: menu1,
         exact: true,
         meta: {
-          title: 'menu1'
+          title: 'menu1_1',
+          icon: LineStyle
         },
         children: [
           {
             path: 'menu1-1',
             component: menu1_1,
             meta: {
-              title: 'menu1_1'
-            }
+              title: 'menu1',
+              icon: LineStyle
+            },
+            children: [
+              {
+                path: 'menu1-1-1/:id',
+                component: menu1_1,
+                exact: true,
+                meta: {
+                  title: 'menu1',
+                  icon: LineStyle
+                },
+                hidden: true
+              },
+              {
+                path: 'menu1-1-2',
+                component: menu1_2,
+                meta: {
+                  title: 'menu1',
+                  icon: LineStyle
+                }
+              }
+            ]
           },
           {
             path: 'menu1-2',
