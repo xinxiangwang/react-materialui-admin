@@ -5,10 +5,13 @@ import { asyncRoutes } from '@/router'
 import BScroll from 'better-scroll'
 import BScrollConstructor from 'better-scroll'
 import './index.scss'
+import { useListStyles } from './useStyles'
 
 const Layout: React.FC = () => {
   const scrollEL = useRef<HTMLDivElement>(null)
   let scroll: BScrollConstructor
+
+  const classes = useListStyles()
 
   const scRefresh = (): void => {
     scroll?.refresh()
@@ -29,7 +32,7 @@ const Layout: React.FC = () => {
       <header className="header-wrapper"></header>
       <section className="body-wrapper">
         <div ref={scrollEL} className="scroll-wrapper">
-          <List className={"nav-wrapper"} component="nav">
+          <List classes={classes} className={"nav-wrapper"} component="nav">
             { asyncRoutes.map(route => (<SubList scRefresh={scRefresh} key={route.path} item={route} basePath={route.path} />)) }
           </List>
         </div>

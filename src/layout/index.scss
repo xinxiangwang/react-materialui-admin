@@ -10,7 +10,7 @@ $navWrapperWidth: 279px !important;
 
   .header-wrapper {
     width: 100%;
-    background-color: pink;
+    background-color: rgb(86, 100, 210);
     position: fixed;
     top: 0;
     left: auto;
@@ -38,13 +38,9 @@ $navWrapperWidth: 279px !important;
       z-index: 899;
       position: relative;
       background-color: #fff;
-    }
-
-    .nav-wrapper {
-      box-sizing: border-box;
-      padding: 16px;
-      width: 100%;
-      
+      // a.active {
+      //   color: rgb(86, 100, 210);
+      // }
     }
     .app-main {
       flex: 1;
