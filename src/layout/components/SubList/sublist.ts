@@ -9,6 +9,7 @@ export interface SubListProps {
    * better-scroll refresh
    */
   scRefresh: () => void
+  openCollapseArr?: Array<() => void>
 }
 
 export interface OneChild extends RoutesConfig {

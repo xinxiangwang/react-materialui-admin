@@ -45,7 +45,6 @@ import routesFlat from '@/utils/routesFalt'
 
 const AppMain: React.FC = () => {
   const routes = routesFlat(asyncRoutes)
-  console.log(routes)
   return (
     <div className="app-main">
       { routes.map((route, i) => (

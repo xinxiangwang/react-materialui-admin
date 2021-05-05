@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useReducer, useContext } from 'react'
 import { List } from '@material-ui/core'
-import { AppMain, SubList } from './components/index'
+import { AppMain, SubList } from './components'
 import { asyncRoutes } from '@/router'
 import BScroll from 'better-scroll'
 import BScrollConstructor from 'better-scroll'
@@ -15,7 +15,8 @@ const Layout: React.FC = () => {
 
   const scRefresh = (): void => {
     scroll?.refresh()
-  }  
+  }
+  
   useEffect(() => {
     if (scrollEL.current) {
       scroll =  new BScroll(scrollEL.current, {
@@ -33,12 +34,17 @@ const Layout: React.FC = () => {
       <section className="body-wrapper">
         <div ref={scrollEL} className="scroll-wrapper">
           <List classes={classes} className={"nav-wrapper"} component="nav">
-            { asyncRoutes.map(route => (<SubList scRefresh={scRefresh} key={route.path} item={route} basePath={route.path} />)) }
+            { asyncRoutes.map(route => (
+              <SubList
+                scRefresh={scRefresh}
+                key={route.path}
+                item={route}
+                basePath={route.path} />
+            )) }
           </List>
         </div>
         <AppMain/>
       </section>
-      
     </div>
   )
 }

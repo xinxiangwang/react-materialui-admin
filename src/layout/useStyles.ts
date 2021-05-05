@@ -5,7 +5,7 @@ export const useListStyles = makeStyles(() =>
   createStyles({
     root: {
       color: 'rgb(107, 119, 140)',
-      padding: 16,
+      padding: 8,
       width: '100%',
       boxSizing: 'border-box'
     }

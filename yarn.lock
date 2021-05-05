@@ -1860,6 +1860,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/better-scroll@^1.12.3":
+  version "1.12.3"
+  resolved "https://registry.npm.taobao.org/@types/better-scroll/download/@types/better-scroll-1.12.3.tgz#18f4a1f78f9764fd2b846523f2515498d0cc5a5f"
+  integrity sha1-GPSh94+XZP0rhGUj8lFUmNDMWl8=
+
 "@types/eslint@^7.2.6":
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-7.2.6.tgz#5e9aff555a975596c03a98b59ecd103decc70c3c"
@@ -2014,7 +2019,7 @@
 
 "@types/react-router-dom@^5.1.7":
   version "5.1.7"
-  resolved "https://registry.npm.taobao.org/@types/react-router-dom/download/@types/react-router-dom-5.1.7.tgz?cache=0&sync_timestamp=1613385080366&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-router-dom%2Fdownload%2F%40types%2Freact-router-dom-5.1.7.tgz#a126d9ea76079ffbbdb0d9225073eb5797ab7271"
+  resolved "https://registry.npm.taobao.org/@types/react-router-dom/download/@types/react-router-dom-5.1.7.tgz#a126d9ea76079ffbbdb0d9225073eb5797ab7271"
   integrity sha1-oSbZ6nYHn/u9sNkiUHPrV5ercnE=
   dependencies:
     "@types/history" "*"

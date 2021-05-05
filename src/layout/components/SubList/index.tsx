@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { List, Collapse, ListItem, ListItemText } from '@material-ui/core'
 import { ListItemLink } from '../index'
 import { ChevronRight } from '@material-ui/icons'
@@ -9,10 +9,10 @@ import {
   useCollapseIndentStyles
 } from '../../useStyles'
 import { useLocation } from 'react-router-dom'
-import { SubListProps, OneChild, hasOneShowingChild, resolvePath } from './sublist'
+import { SubListProps, OneChild, resolvePath } from './sublist'
 
 const SubList: React.FC<SubListProps> = (props) => {
-  const { item, basePath, scRefresh } = props
+  const { item, basePath, scRefresh, openCollapseArr } = props
 
   const [open, setOpen] = useState(false)
 
@@ -24,11 +24,11 @@ const SubList: React.FC<SubListProps> = (props) => {
 
   const CollapseOpenTime = 300
 
-  let onlyOneChild: OneChild = {
-    ...item,
-    path: '',
-    noShowingChildren: true
-  }
+  // let onlyOneChild: OneChild = {
+  //   ...item,
+  //   path: '',
+  //   noShowingChildren: true
+  // }
 
   const handleClick = (): void => {
     setOpen(!open)
@@ -40,9 +40,39 @@ const SubList: React.FC<SubListProps> = (props) => {
     
   }
 
+  const openCollapse = (): void => {
+    setOpen(true)
+  }
+
   const isActive = (path: string): string => {
     return curPath === path ? 'active' : ''
   }
+
+  const aaa = async () => {
+    
+  }
+
+  useEffect(() => {
+    (async function() {
+      if (curPath === basePath) {
+        if (openCollapseArr) {
+          for(let i = openCollapseArr.length - 1; i >= 0; i--) {
+          // for(let i = 0; i < openCollapseArr.length; i++) {
+            await new Promise((resolve) => {
+              setTimeout(() => {
+                resolve(true)
+              }, 10)
+            }).then(res => {
+              openCollapseArr[i]()
+            })
+          }
+        }
+        setTimeout(() => {
+          scRefresh()
+        }, CollapseOpenTime)
+      }
+    })()
+  }, [curPath])
 
   console.log('被渲染')
 
@@ -62,11 +92,16 @@ const SubList: React.FC<SubListProps> = (props) => {
                 { open ? <ExpandMore /> : <ChevronRight /> }
               </ListItem>
 
-              <Collapse classes={collapseClasses}  in={open} timeout={CollapseOpenTime} unmountOnExit>
+              <Collapse classes={collapseClasses} in={open} timeout={CollapseOpenTime}>
                 <List component="div">
                   {
                     item.children?.map((child, index) => (
-                      <SubList scRefresh={scRefresh} key={index} item={child} basePath={resolvePath(child.path, basePath)} />
+                      <SubList
+                        scRefresh={scRefresh}
+                        openCollapseArr={ openCollapseArr ? openCollapseArr.concat(openCollapse) : new Array().concat(openCollapse) }
+                        key={index}
+                        item={child}
+                        basePath={resolvePath(child.path, basePath)} />
                     ))
                   }
                 </List>

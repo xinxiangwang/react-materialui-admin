@@ -75,7 +75,7 @@ const asyncRoutes: Array<RoutesConfig> = [
                 path: 'menu1-1-2',
                 component: menu1_2,
                 meta: {
-                  title: 'menu1',
+                  title: 'menu1-1-2',
                   icon: LineStyle
                 }
               }
@@ -106,7 +106,97 @@ const asyncRoutes: Array<RoutesConfig> = [
         }
       }
     ]
-  }
+  },
+  {
+    path: '/dashboard1',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard2',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard3',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard4',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard5',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard6',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard7',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard8',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard9',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
+  {
+    path: '/dashboard10',
+    component: Dashboard,
+    roles: ['admin'],
+    meta: {
+      title: 'dashboard',
+      icon: DashboardIcon
+    }
+  },
 ]
 
 const constantRoutes: Array<RoutesConfig> = [
