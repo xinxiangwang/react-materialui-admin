@@ -48,13 +48,9 @@ const SubList: React.FC<SubListProps> = (props) => {
     return curPath === path ? 'active' : ''
   }
 
-  const aaa = async () => {
-    
-  }
-
   useEffect(() => {
     (async function() {
-      if (curPath === basePath) {
+      if (curPath === basePath) { // if current list item is active, open all parent components' Collapse
         if (openCollapseArr) {
           for(let i = openCollapseArr.length - 1; i >= 0; i--) {
           // for(let i = 0; i < openCollapseArr.length; i++) {

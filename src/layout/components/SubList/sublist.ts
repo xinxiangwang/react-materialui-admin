@@ -9,7 +9,15 @@ export interface SubListProps {
    * better-scroll refresh
    */
   scRefresh: () => void
+
+  /**
+   * all parent components' Collapse open method
+   */
   openCollapseArr?: Array<() => void>
+
+  /**
+   * close drawer when list item click and mobile drawer is open
+   */
   closeDrawer: () => void
 }
 
