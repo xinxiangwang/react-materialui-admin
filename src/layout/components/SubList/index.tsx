@@ -7,7 +7,7 @@ import {
   useListItemStyles as useStyles,
   useIconStyles,
   useCollapseIndentStyles
-} from '../../useStyles'
+} from './useStyles'
 import { useLocation } from 'react-router-dom'
 import { SubListProps, OneChild, resolvePath } from './sublist'
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { asyncRoutes } from '@/router'
 import routesFlat from '@/utils/routesFalt'
+import { useMainStyles } from './useStyles'
 
 // interface INestedRoutesProps {
 //   child: RoutesConfig
@@ -45,8 +46,10 @@ import routesFlat from '@/utils/routesFalt'
 
 const AppMain: React.FC = () => {
   const routes = routesFlat(asyncRoutes)
+
+  const classes = useMainStyles()
   return (
-    <div className="app-main">
+    <div className={classes.appMain}>
       { routes.map((route, i) => (
         <Route
           key={route.key || i}

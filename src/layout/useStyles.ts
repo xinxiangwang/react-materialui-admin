@@ -1,5 +1,5 @@
-import index from '@/pages/404';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { NAV_WRAPPER_WIDTH, HEADER_WRAPPER_HEIGHT } from './style'
 
 export const useListStyles = makeStyles(() =>
   createStyles({
@@ -12,40 +12,31 @@ export const useListStyles = makeStyles(() =>
   })
 )
 
-export const useListItemStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      borderRadius: 16,
-      transition: 'color linear',
-      "&.active": {
-        color: 'rgb(86, 100, 210)',
-      },
-      "&.active span": {
-        fontWeight: 700
-      },
-      "& span": {
-        fontWeight: 500,
-        paddingLeft: '2em'
-      }
-    }
-  })
-)
-
-/**
- * route left icon
- */
-export const useIconStyles = makeStyles(() => 
-  createStyles({
-    root: {
-      position: 'absolute'
-    }
-  })
-)
-
-
-export const useCollapseIndentStyles = makeStyles({
-  container: {
-    paddingLeft: '1em'
+export const useLayoutStyles = makeStyles({
+  layoutWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    width: '100%',
+    overflow: 'hidden',
+    backgroundColor: 'rgb(244, 245, 247)'
+  },
+  bodyWrapper: {
+    display: 'flex',
+    flex: 1,
+    flexBasis: 'auto',
+    flexDirection: 'row',
+    boxSizing: 'border-box',
+    paddingTop: HEADER_WRAPPER_HEIGHT,
+    height: '100%'
+  },
+  scrollWrapper: {
+    overflow: 'hidden',
+    height: '100%',
+    width: NAV_WRAPPER_WIDTH,
+    zIndex: 899,
+    position: 'relative',
+    backgroundColor: '#fff'
   }
 })
 
