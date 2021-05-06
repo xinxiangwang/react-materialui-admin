@@ -9,7 +9,7 @@ import {
   useCollapseIndentStyles
 } from './useStyles'
 import { useLocation } from 'react-router-dom'
-import { SubListProps, OneChild, resolvePath } from './sublist'
+import { SubListProps, resolvePath } from './sublist'
 
 const SubList: React.FC<SubListProps> = (props) => {
   const { item, basePath, scRefresh, openCollapseArr, closeDrawer } = props
@@ -68,7 +68,7 @@ const SubList: React.FC<SubListProps> = (props) => {
         }, CollapseOpenTime)
       }
     })()
-  }, [curPath])
+  })
 
   console.log('被渲染')
 
@@ -95,7 +95,7 @@ const SubList: React.FC<SubListProps> = (props) => {
                       <SubList
                         closeDrawer={closeDrawer}
                         scRefresh={scRefresh}
-                        openCollapseArr={ openCollapseArr ? openCollapseArr.concat(openCollapse) : new Array().concat(openCollapse) }
+                        openCollapseArr={ openCollapseArr ? openCollapseArr.concat(openCollapse) : ([] as Array<() => void>).concat(openCollapse) }
                         key={index}
                         item={child}
                         basePath={resolvePath(child.path, basePath)} />

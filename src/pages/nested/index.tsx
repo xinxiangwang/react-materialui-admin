@@ -1,5 +1,3 @@
-import React from 'react'
-
 import menu1_1 from './menu1/menu1-1'
 import menu1_2 from './menu1/menu1-2'
 import menu1_3 from './menu1/menu1-3'

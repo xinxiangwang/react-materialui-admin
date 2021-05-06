@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useReducer, useContext } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { List, Hidden, Drawer } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles' 
 import { AppMain, SubList, Head } from './components'
@@ -14,7 +14,7 @@ const Layout: React.FC = () => {
   const listClasses = useListStyles()
   const layoutClasses = useLayoutStyles()
 
-  let scroll: BScrollConstructor
+  const [scroll, setScroll] = useState<BScrollConstructor>()
 
   const scRefresh = () => {
     scroll?.refresh()
@@ -47,14 +47,14 @@ const Layout: React.FC = () => {
   
   useEffect(() => {
     if (scrollEL.current) {
-      scroll =  new BScroll(scrollEL.current, {
+      setScroll(new BScroll(scrollEL.current, {
         scrollbar: true,
         mouseWheel: true,
         probeType: 3,
         bounce: false
-      })
+      }))
     }
-  })
+  }, [])
 
   return (
     <div className={layoutClasses.layoutWrapper}>
