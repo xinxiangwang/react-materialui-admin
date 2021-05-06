@@ -1,11 +1,11 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { NAV_WRAPPER_WIDTH, HEADER_WRAPPER_HEIGHT } from './style'
 
-export const useListStyles = makeStyles(() =>
+export const useListStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       color: 'rgb(107, 119, 140)',
-      padding: 8,
+      padding: theme.spacing(1),
       width: '100%',
       boxSizing: 'border-box'
     }
@@ -36,7 +36,11 @@ export const useLayoutStyles = makeStyles({
     width: NAV_WRAPPER_WIDTH,
     zIndex: 899,
     position: 'relative',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    borderRight: '1px solid rgba(0, 0, 0, 0.12)'
+  },
+  drawerPaper: {
+    width: NAV_WRAPPER_WIDTH,
   }
 })
 

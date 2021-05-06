@@ -10,6 +10,7 @@ export interface SubListProps {
    */
   scRefresh: () => void
   openCollapseArr?: Array<() => void>
+  closeDrawer: () => void
 }
 
 export interface OneChild extends RoutesConfig {

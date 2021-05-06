@@ -1,8 +1,12 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { HEADER_WRAPPER_HEIGHT } from '../../style'
 
-export const useHeadStyles = makeStyles(() =>
+export const useHeadStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      display: 'flex',
+      justifyContent: 'space-between'
+    },
     headerWrapper: {
       width: '100%',
       backgroundColor: 'rgb(86, 100, 210)',
@@ -13,10 +17,7 @@ export const useHeadStyles = makeStyles(() =>
       boxSizing: 'border-box',
       height: HEADER_WRAPPER_HEIGHT,
       zIndex: 999,
-      flexShrink: 0,
-      display: 'flex',
-      padding: '8px',
-      justifyContent: 'space-between'
+      flexShrink: 0
     },
     logo: {
       fontSize: '26px',
@@ -24,7 +25,15 @@ export const useHeadStyles = makeStyles(() =>
       alignItems: 'center'
     },
     userSetting: {
-      height: '100%'
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center'
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      },
     }
   })
 )

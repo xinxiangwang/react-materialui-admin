@@ -12,7 +12,7 @@ import { useLocation } from 'react-router-dom'
 import { SubListProps, OneChild, resolvePath } from './sublist'
 
 const SubList: React.FC<SubListProps> = (props) => {
-  const { item, basePath, scRefresh, openCollapseArr } = props
+  const { item, basePath, scRefresh, openCollapseArr, closeDrawer } = props
 
   const [open, setOpen] = useState(false)
 
@@ -82,7 +82,7 @@ const SubList: React.FC<SubListProps> = (props) => {
           { !item.children ?
             // hasOneShowingChild(item.children, item, onlyOneChild) &&
             // (!onlyOneChild.children || onlyOneChild.noShowingChildren) ?
-            <ListItemLink classes={{ ...classes, button: isActive(basePath) }} primary={item.meta?.title} to={resolvePath('', basePath)} >
+            <ListItemLink onClick={closeDrawer} classes={{ ...classes, button: isActive(basePath) }} primary={item.meta?.title} to={resolvePath('', basePath)} >
               { item.meta?.icon ? <item.meta.icon classes={iconClasses} /> : null }
             </ListItemLink> :
             <>
@@ -97,6 +97,7 @@ const SubList: React.FC<SubListProps> = (props) => {
                   {
                     item.children?.map((child, index) => (
                       <SubList
+                        closeDrawer={closeDrawer}
                         scRefresh={scRefresh}
                         openCollapseArr={ openCollapseArr ? openCollapseArr.concat(openCollapse) : new Array().concat(openCollapse) }
                         key={index}
