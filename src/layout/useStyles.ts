@@ -37,10 +37,12 @@ export const useLayoutStyles = makeStyles({
     zIndex: 899,
     position: 'relative',
     backgroundColor: '#fff',
+    boxSizing: 'border-box',
     borderRight: '1px solid rgba(0, 0, 0, 0.12)'
   },
   drawerPaper: {
     width: NAV_WRAPPER_WIDTH,
+    paddingTop: HEADER_WRAPPER_HEIGHT
   }
 })
 
