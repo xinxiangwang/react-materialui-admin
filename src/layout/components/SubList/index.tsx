@@ -68,7 +68,7 @@ const SubList: React.FC<SubListProps> = (props) => {
         }, CollapseOpenTime)
       }
     })()
-  })
+  }, [curPath])
 
   console.log('被渲染')
 

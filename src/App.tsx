@@ -17,7 +17,6 @@ function App() {
           />
         ))
       }
-      <Redirect from="/" to="/dashboard"></Redirect>
     </Switch>
   );
 }

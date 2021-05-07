@@ -1995,6 +1995,11 @@
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
 
+"@types/js-cookie@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.npm.taobao.org/@types/js-cookie/download/@types/js-cookie-2.2.6.tgz#f1a1cb35aff47bc5cfb05cb0c441ca91e914c26f"
+  integrity sha1-8aHLNa/0e8XPsFywxEHKkekUwm8=
+
 "@types/json-schema@^7.0.3", "@types/json-schema@^7.0.5":
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
@@ -2698,6 +2703,13 @@ aws4@^1.8.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
+
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.npm.taobao.org/axios/download/axios-0.21.1.tgz?cache=0&sync_timestamp=1608609188013&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faxios%2Fdownload%2Faxios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha1-IlY0gZYvTWvemnbVFu8OXTwJsrg=
+  dependencies:
+    follow-redirects "^1.10.0"
 
 axobject-query@^2.0.2:
   version "2.2.0"
@@ -5250,6 +5262,11 @@ follow-redirects@^1.0.0:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.2.tgz#dd73c8effc12728ba5cf4259d760ea5fb83e3147"
   integrity sha512-6mPTgLxYm3r6Bkkg0vNM0HTjfGrOEtsfbhagQvbxDEsEkpNhw582upBaoRZylzen6krEmxXJgt9Ju6HiI4O7BA==
 
+follow-redirects@^1.10.0:
+  version "1.14.0"
+  resolved "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.0.tgz?cache=0&sync_timestamp=1619369228463&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.14.0.tgz#f5d260f95c5f8c105894491feee5dc8993b402fe"
+  integrity sha1-9dJg+VxfjBBYlEkf7uXciZO0Av4=
+
 for-each@^0.3.3:
   version "0.3.3"
   resolved "https://registry.npm.taobao.org/for-each/download/for-each-0.3.3.tgz#69b447e88a0a5d32c3e7084f3f1710034b21376e"
@@ -6877,6 +6894,11 @@ jest@24.9.0:
   dependencies:
     import-local "^2.0.0"
     jest-cli "^24.9.0"
+
+js-cookie@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npm.taobao.org/js-cookie/download/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
+  integrity sha1-aeEG3F1YBolFYpAqpbrsN0Tpsrg=
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -9474,10 +9496,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
-react-redux@^7.2.3:
-  version "7.2.3"
-  resolved "https://registry.npm.taobao.org/react-redux/download/react-redux-7.2.3.tgz?cache=0&sync_timestamp=1616458667150&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-redux%2Fdownload%2Freact-redux-7.2.3.tgz#4c084618600bb199012687da9e42123cca3f0be9"
-  integrity sha1-TAhGGGALsZkBJofankISPMo/C+k=
+react-redux@^7.2.4:
+  version "7.2.4"
+  resolved "https://registry.nlark.com/react-redux/download/react-redux-7.2.4.tgz#1ebb474032b72d806de2e0519cd07761e222e225"
+  integrity sha1-HrtHQDK3LYBt4uBRnNB3YeIi4iU=
   dependencies:
     "@babel/runtime" "^7.12.1"
     "@types/react-redux" "^7.1.16"
@@ -9692,13 +9714,20 @@ redux-thunk@^2.3.0:
   resolved "https://registry.npm.taobao.org/redux-thunk/download/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
   integrity sha1-UcLBmhhe1Rh6qpotCLZm0NZGdiI=
 
-redux@^4.0.0, redux@^4.0.5:
+redux@^4.0.0:
   version "4.0.5"
   resolved "https://registry.npm.taobao.org/redux/download/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
   integrity sha1-TbXeWBbheJHeioDEJCMtBvBR2T8=
   dependencies:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
+
+redux@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.nlark.com/redux/download/redux-4.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fredux%2Fdownload%2Fredux-4.1.0.tgz#eb049679f2f523c379f1aff345c8612f294c88d4"
+  integrity sha1-6wSWefL1I8N58a/zRchhLylMiNQ=
+  dependencies:
+    "@babel/runtime" "^7.9.2"
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"

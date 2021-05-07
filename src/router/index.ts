@@ -38,6 +38,7 @@ const asyncRoutes: Array<RoutesConfig> = [
   {
     path: '/nested',
     roles: ['admin'],
+    exact: true,
     meta: {
       title: 'nested',
       icon: LineStyle
@@ -56,6 +57,7 @@ const asyncRoutes: Array<RoutesConfig> = [
           {
             path: 'menu1-1',
             component: menu1_1,
+            exact: true,
             meta: {
               title: 'menu1',
               icon: LineStyle
@@ -73,6 +75,7 @@ const asyncRoutes: Array<RoutesConfig> = [
               },
               {
                 path: 'menu1-1-2',
+                exact: true,
                 component: menu1_2,
                 meta: {
                   title: 'menu1-1-2',
@@ -83,6 +86,7 @@ const asyncRoutes: Array<RoutesConfig> = [
           },
           {
             path: 'menu1-2',
+            exact: true,
             component: menu1_2,
             meta: {
               title: 'menu1_2'
@@ -90,6 +94,7 @@ const asyncRoutes: Array<RoutesConfig> = [
           },
           {
             path: 'menu1-3',
+            exact: true,
             component: menu1_3,
             meta: {
               title: 'menu1_3'
@@ -99,6 +104,7 @@ const asyncRoutes: Array<RoutesConfig> = [
       },
       {
         path: 'menu2',
+        exact: true,
         roles: ['admin'],
         component: menu2,
         meta: {
