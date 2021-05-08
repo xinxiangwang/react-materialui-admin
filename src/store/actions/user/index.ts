@@ -9,11 +9,11 @@ export const userLogin = (params: ILoginReq) => (
   async (dispatch: Dispatch) => {
     try {
       let { data } = await login(params)
-      if (data.data.token) {
+      if (data.token) {
         dispatch({
           type: user.SET_TOKEN,
           payload: {
-            token: data.data.token
+            token: data.token
           }
         })
       } else {

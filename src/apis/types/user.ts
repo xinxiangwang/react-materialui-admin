@@ -3,11 +3,11 @@
  */
 export interface ILoginReq {
   username: string
-  password: string | number
+  password: string
 }
 /**
  * 登录接口响应结构
  */
-export interface ILoginRes extends BaseResponse {
+export interface ILoginRes {
   token: string
 }
