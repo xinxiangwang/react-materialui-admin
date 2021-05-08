@@ -1,13 +1,73 @@
 import React from 'react'
-import { TextField } from '@material-ui/core'
+import { Formik, Form, Field } from 'formik'
+import { Button, LinearProgress } from '@material-ui/core'
+import { TextField } from 'formik-material-ui'
+import { useLoginStyles } from './useStyles'
+import { ILoginReq } from '@/apis/types/user'
 
-export default function index() {
-  console.log('login被渲染')
+const Login: React.FC = () => {
+  const loginClasses = useLoginStyles()
+
+  const handleSubmit = async (values: ILoginReq, setSubmitting: (isSubmitting: boolean) => void) => {
+    await userLogin(values)
+    setSubmitting(false)
+  }
+
   return (
-    <div>
-      <form autoComplete="off" noValidate>
-        <TextField required id="outlined-basic" label="用户名" variant="outlined" />
-      </form>
+    <div className={loginClasses.login}>
+      <Formik
+        initialValues={{
+          username: '',
+          password: ''
+        }}
+        validate={
+          values => {
+            const errors: Partial<ILoginReq> = {}
+            if (!values.username) {
+              errors.username = 'Required'
+            } else if (values.username.length < 7) {
+              errors.username = 'username length must >= 7'
+            }
+            return errors
+          }
+        }
+        onSubmit={(values, { setSubmitting }) => {
+          handleSubmit(values, setSubmitting)
+          // setTimeout(() => {
+          //   setSubmitting(false)
+          //   alert(JSON.stringify(values, null, 2))
+          // }, 500)
+        }}
+       >
+      {({ submitForm, isSubmitting }) => (
+        <Form autoComplete="off">
+          <Field
+            component={TextField}
+            name="username"
+            label="Username"
+          />
+          <br />
+          <Field 
+            component={TextField}
+            type="password"
+            label="Password"
+            name="password"
+          />
+          <br />
+          {isSubmitting && <LinearProgress />}
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={isSubmitting}
+            onClick={submitForm}
+          >
+            Submit
+          </Button>
+        </Form>
+      )}
+      </Formik>
     </div>
   )
 }
+
+export default Login
