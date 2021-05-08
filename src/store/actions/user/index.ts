@@ -1,18 +1,31 @@
 import { login } from '@/apis/user'
-import { ILoginReq } from '@/apis/user/user.type'
+import { ILoginReq } from '@/apis/types/user'
 import { Dispatch } from 'redux'
-export default {
-  SET_TOKEN: Symbol(),
-  SET_INTRODUCTION: Symbol(),
-  SET_NAME: Symbol(),
-  SET_AVATAR: Symbol(),
-  SET_ROLES: Symbol()
-}
+import user from './actionType'
+
+export default user
 
 export const userLogin = (params: ILoginReq) => (
   async (dispatch: Dispatch) => {
-    let ret = await login(params)
-    if (ret.data.token)
-    ret.data.token
+    try {
+      let { data } = await login(params)
+      if (data.data.token) {
+        dispatch({
+          type: user.SET_TOKEN,
+          payload: {
+            token: data.data.token
+          }
+        })
+      } else {
+        dispatch({
+          type: user.LOGIN_FAILED
+        })
+      }
+    } catch {
+      dispatch({
+        type: user.LOGIN_FAILED
+      })
+    }
+    
   }
 )

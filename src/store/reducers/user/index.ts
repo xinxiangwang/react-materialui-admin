@@ -1,4 +1,3 @@
-import { Action } from 'redux'
 import { user } from '../../actions'
 
 interface IUser {
@@ -9,9 +8,6 @@ interface IUser {
   roles: Array<string>
 }
 
-interface IAction extends Action<symbol> {
-  payload: IUser
-}
 
 const initUserState: IUser = {
   token: '',
@@ -21,7 +17,7 @@ const initUserState: IUser = {
   roles: []
 }
 
-export default (state: IUser = initUserState, action: IAction): IUser => {
+export default (state: IUser = initUserState, action: IAction<IUser>): IUser => {
   switch(action.type) {
     case user.SET_TOKEN:
       return {
@@ -47,6 +43,14 @@ export default (state: IUser = initUserState, action: IAction): IUser => {
       return {
         ...initUserState,
         roles: action.payload.roles
+      }
+    case user.LOGIN_FAILED:
+      return {
+        token: '',
+        name: '',
+        avatar: '',
+        introduction: '',
+        roles: []
       }
     default:
       return state

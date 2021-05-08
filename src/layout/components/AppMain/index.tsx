@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { asyncRoutes } from '@/router'
 import routesFlat from '@/utils/routesFalt'
 import { useMainStyles } from './useStyles'

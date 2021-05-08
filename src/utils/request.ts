@@ -1,13 +1,8 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { getToken } from './auth'
 
-interface IBaseResponse {
-  code: number
-  message?: string
-}
-
 const service = axios.create({
-  baseURL: process.env.BASE_API,
+  baseURL: process.env.API_BASE_URL,
   timeout: 5000
 })
 
@@ -22,7 +17,7 @@ service.interceptors.request.use(
 )
 
 service.interceptors.response.use(
-  (response: AxiosResponse) => {
+  response => {
     const res = response.data
 
     if (res.code !== 20000) {
