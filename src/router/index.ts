@@ -3,7 +3,7 @@ import Dashboard from '@/pages/dashboard'
 import { menu1_1, menu1_2, menu1_3, menu2, menu1 } from '@/pages/nested'
 import NotFound from '@/pages/404'
 import Login from '@/pages/login'
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { LineStyle, SvgIconComponent, Dashboard as DashboardIcon } from '@material-ui/icons'
 
 interface MetaInfo {

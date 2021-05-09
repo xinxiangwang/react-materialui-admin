@@ -1,16 +1,9 @@
 import { user } from '../../actions'
-
-interface IUser {
-  token: string
-  name: string
-  avatar: string
-  introduction: string
-  roles: Array<string>
-}
-
+import { IUser } from '../../types/user'
+import { getToken } from '@/utils/auth'
 
 const initUserState: IUser = {
-  token: '',
+  token: getToken(),
   name: '',
   avatar: '',
   introduction: '',

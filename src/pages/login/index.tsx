@@ -4,13 +4,33 @@ import { Button, LinearProgress } from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
 import { useLoginStyles } from './useStyles'
 import { ILoginReq } from '@/apis/types/user'
+import { useDispatch } from "react-redux"
+import { login as loginAction } from '@/store/actions/user'
+import { login } from '@/apis/user'
+import { useHistory, useLocation } from 'react-router-dom'
+import { setToken } from '@/utils/auth'
+import { getUrlSearchValue } from '@/utils'
 
 const Login: React.FC = () => {
   const loginClasses = useLoginStyles()
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { search } = useLocation()
+
+  const redirect = getUrlSearchValue(search, 'Redirect')
 
   const handleSubmit = async (values: ILoginReq, setSubmitting: (isSubmitting: boolean) => void) => {
-    await userLogin(values)
-    setSubmitting(false)
+    try {
+      const res = await login(values)
+      if (res.data.token) {
+        dispatch(loginAction(res.data.token))
+        setToken(res.data.token)
+        setSubmitting(false)
+        history.push(redirect && redirect !== '/' ? redirect : '/dashboard')
+      }
+    } catch(err) {
+      console.log(err)
+    }
   }
 
   return (
