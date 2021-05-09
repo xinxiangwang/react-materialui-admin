@@ -37,6 +37,11 @@ export default (state: IUser = initUserState, action: IAction<IUser>): IUser => 
         ...initUserState,
         roles: action.payload.roles
       }
+    case user.SET_INFO:
+      return {
+        ...initUserState,
+        ...action.payload
+      }
     case user.LOGIN_FAILED:
       return {
         token: '',

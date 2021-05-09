@@ -1,6 +1,5 @@
 import React from 'react';
-import './App.scss';
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { constantRoutes } from '@/router'
 
 function App() {

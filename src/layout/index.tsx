@@ -3,20 +3,25 @@ import { List, Hidden, Drawer } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles' 
 import BScroll from 'better-scroll'
 import BScrollConstructor from 'better-scroll'
-import { useSelector } from "react-redux"
-import { Redirect, useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux"
+import { Redirect, useLocation, useHistory } from 'react-router-dom'
 import { IState } from '@/store/types'
 import { asyncRoutes } from '@/router'
 import { AppMain, SubList, Head } from './components'
 import { useListStyles, useLayoutStyles } from './useStyles'
+import { getInfo } from '@/store/actions/user'
+import { getUserInfoByToken } from '@/apis/user'
 
 const Layout: React.FC = () => {
   const theme = useTheme()
   const scrollEL = useRef<HTMLDivElement>(null)
+  const content = useRef<HTMLDivElement>(null)
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const listClasses = useListStyles()
   const layoutClasses = useLayoutStyles()
   const { pathname } = useLocation()
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   const token = useSelector((state: IState) => {
     return state.user.token
@@ -40,7 +45,7 @@ const Layout: React.FC = () => {
 
   const navbar = (
     <div ref={scrollEL} className={layoutClasses.scrollWrapper}>
-      <List classes={listClasses} className={"nav-wrapper"} component="nav">
+      <List ref={content} classes={listClasses} className={"nav-wrapper"} component="nav">
         { asyncRoutes.map(route => (
           <SubList
             closeDrawer={closeDrawer}
@@ -54,6 +59,24 @@ const Layout: React.FC = () => {
   )
   
   useEffect(() => {
+    if (token) {
+      getUserInfoByToken({ token }).then(res => {
+        if (res.data) {
+          dispatch(getInfo(res.data))
+        } else {
+          throw new Error()
+        }
+      }).catch(err => {
+        history.push('/login')
+      })
+    } else {
+      history.push('/login')
+    }
+  }, [token])
+
+  console.log(scrollEL)
+  
+  useEffect(() => {
     if (scrollEL.current) {
       setScroll(new BScroll(scrollEL.current, {
         scrollbar: true,
@@ -63,7 +86,6 @@ const Layout: React.FC = () => {
       }))
     }
   }, [])
-
   return (
     token ? (
       <div className={layoutClasses.layoutWrapper}>
@@ -91,7 +113,6 @@ const Layout: React.FC = () => {
         </section>
       </div>
     ) : <Redirect to={`/login?Redirect=${pathname}`} />
-    
   )
 }
 
