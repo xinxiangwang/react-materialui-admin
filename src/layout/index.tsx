@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { List, Hidden, Drawer } from '@material-ui/core'
+import { List, Hidden, Drawer, Paper } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles' 
 import BScroll from 'better-scroll'
 import BScrollConstructor from 'better-scroll'
@@ -43,7 +43,7 @@ const Layout: React.FC = () => {
   }
 
   const navbar = (
-    <div ref={scrollEL} className={layoutClasses.scrollWrapper}>
+    <Paper ref={scrollEL} className={layoutClasses.scrollWrapper} variant="outlined" square>
       <List ref={content} classes={listClasses} className={"nav-wrapper"} component="nav">
         { asyncRoutes.map(route => (
           <SubList
@@ -54,7 +54,7 @@ const Layout: React.FC = () => {
             basePath={route.path} />
         )) }
       </List>
-    </div>
+    </Paper>
   )
 
   

@@ -1,9 +1,9 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 export const useListItemStyles = makeStyles(() =>
   createStyles({
     root: {
-      borderRadius: 16,
+      borderRadius: 12,
       transition: 'color linear',
       "&.active": {
         color: 'rgb(86, 100, 210)',
@@ -12,8 +12,7 @@ export const useListItemStyles = makeStyles(() =>
         fontWeight: 700
       },
       "& span": {
-        fontWeight: 500,
-        paddingLeft: '2em'
+        fontWeight: 500
       }
     }
   })
@@ -22,10 +21,10 @@ export const useListItemStyles = makeStyles(() =>
 /**
  * route left icon
  */
-export const useIconStyles = makeStyles(() => 
+export const useIconStyles = makeStyles((theme: Theme) => 
   createStyles({
     root: {
-      position: 'absolute'
+      marginRight: theme.spacing(1)
     }
   })
 )

@@ -2,6 +2,8 @@ import React from 'react'
 import { useHeadStyles } from './useStyles'
 import { Avatar, IconButton, Toolbar } from '@material-ui/core'
 import { Menu as MenuIcon } from '@material-ui/icons'
+import { useSelector } from 'react-redux'
+import { IState } from '@/store/types'
 
 interface HeadProps {
   toogleDrawer: () => void
@@ -10,6 +12,10 @@ interface HeadProps {
 const Head: React.FC<HeadProps> = (props) => {
   const { toogleDrawer } = props
   const classes = useHeadStyles()
+
+  const user = useSelector((state: IState) => {
+    return state.user
+  })
   return (
     <header className={classes.headerWrapper}>
       <Toolbar className={classes.root}>
@@ -26,7 +32,7 @@ const Head: React.FC<HeadProps> = (props) => {
           LOGO
         </div>
         <div className={classes.userSetting}>
-          <Avatar variant="rounded" src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" />
+          <Avatar variant="rounded" src={user.avatar} />
         </div>
       </Toolbar>
     </header>

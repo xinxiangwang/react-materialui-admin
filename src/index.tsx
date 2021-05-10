@@ -7,12 +7,21 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+
+const theme = createMuiTheme({
+  shape: {
+    borderRadius: 12
+  }
+})
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

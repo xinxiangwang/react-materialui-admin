@@ -5,7 +5,8 @@ export const useHeadStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      width: '100%'
     },
     headerWrapper: {
       width: '100%',
@@ -17,7 +18,9 @@ export const useHeadStyles = makeStyles((theme: Theme) =>
       boxSizing: 'border-box',
       height: HEADER_WRAPPER_HEIGHT,
       zIndex: 999,
-      flexShrink: 0
+      flexShrink: 0,
+      display: 'flex',
+      alignItems: 'center'
     },
     logo: {
       fontSize: '26px',
