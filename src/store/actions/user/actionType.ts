@@ -5,5 +5,6 @@ export default {
   SET_AVATAR: Symbol(),
   SET_ROLES: Symbol(),
   LOGIN_FAILED: Symbol(),
-  SET_INFO: Symbol()
+  SET_INFO: Symbol(),
+  LOG_OUT: Symbol()
 }

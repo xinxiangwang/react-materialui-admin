@@ -39,10 +39,9 @@ export default (state: IUser = initUserState, action: IAction<IUser>): IUser => 
       }
     case user.SET_INFO:
       return {
-        ...initUserState,
         ...action.payload
       }
-    case user.LOGIN_FAILED:
+    case user.LOGIN_FAILED, user.LOG_OUT:
       return {
         token: '',
         name: '',

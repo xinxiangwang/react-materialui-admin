@@ -1,12 +1,18 @@
 import user from './actionType'
-import { IUser, IUserBaseInfo } from '@/store/types/user'
+import { IUser } from '@/store/types/user'
+import { removeToken } from '@/utils/auth'
 
 export default user
 
-export const login = (token: string): IAction<IUser> => (
-  { type: user.SET_TOKEN, payload: { token } }
-)
+export const login = (token: string): IAction<IUser> => {
+  return { type: user.SET_TOKEN, payload: { token } }
+}
 
-export const getInfo = (data: IUserBaseInfo): IAction<IUserBaseInfo> => (
+export const setInfo = (data: IUser): IAction<IUser> => (
   { type: user.SET_INFO, payload: data }
 )
+
+export const logOut = () => {
+  removeToken()
+  return { type: user.LOG_OUT }
+}

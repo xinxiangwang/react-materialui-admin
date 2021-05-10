@@ -4,12 +4,12 @@ import { useTheme } from '@material-ui/core/styles'
 import BScroll from 'better-scroll'
 import BScrollConstructor from 'better-scroll'
 import { useSelector, useDispatch } from "react-redux"
-import { Redirect, useLocation, useHistory } from 'react-router-dom'
+import { Redirect, useLocation } from 'react-router-dom'
 import { IState } from '@/store/types'
 import { asyncRoutes } from '@/router'
 import { AppMain, SubList, Head } from './components'
 import { useListStyles, useLayoutStyles } from './useStyles'
-import { getInfo } from '@/store/actions/user'
+import { setInfo, logOut } from '@/store/actions/user'
 import { getUserInfoByToken } from '@/apis/user'
 
 const Layout: React.FC = () => {
@@ -21,7 +21,6 @@ const Layout: React.FC = () => {
   const layoutClasses = useLayoutStyles()
   const { pathname } = useLocation()
   const dispatch = useDispatch()
-  const history = useHistory()
 
   const token = useSelector((state: IState) => {
     return state.user.token
@@ -57,25 +56,26 @@ const Layout: React.FC = () => {
       </List>
     </div>
   )
+
   
   useEffect(() => {
     if (token) {
       getUserInfoByToken({ token }).then(res => {
         if (res.data) {
-          dispatch(getInfo(res.data))
+          console.log(res)
+          dispatch(setInfo({
+            token,
+            ...res.data
+          }))
         } else {
           throw new Error()
         }
       }).catch(err => {
-        history.push('/login')
+        dispatch(logOut())
       })
-    } else {
-      history.push('/login')
     }
-  }, [token])
+  }, [token, dispatch])
 
-  console.log(scrollEL)
-  
   useEffect(() => {
     if (scrollEL.current) {
       setScroll(new BScroll(scrollEL.current, {
