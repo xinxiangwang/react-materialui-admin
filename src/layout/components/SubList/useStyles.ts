@@ -29,8 +29,10 @@ export const useIconStyles = makeStyles((theme: Theme) =>
   })
 )
 
-export const useCollapseIndentStyles = makeStyles({
-  container: {
-    paddingLeft: '1em'
-  }
-})
+export const useCollapseIndentStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      paddingLeft: theme.spacing(2)
+    }
+  })
+)

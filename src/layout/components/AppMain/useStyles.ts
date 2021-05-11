@@ -1,11 +1,12 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-export const useMainStyles = makeStyles(() =>
+export const useMainStyles = makeStyles((theme: Theme) =>
   createStyles({
     appMain: {
       flex: 1,
       flexBasis: 'auto',
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
+      padding: theme.spacing(2)
     }
   })
 )
