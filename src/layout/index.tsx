@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useCallback } from 'react'
 import { List, Hidden, Drawer, Paper } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles' 
 import BScroll from 'better-scroll'
 import BScrollConstructor from 'better-scroll'
 import { useSelector, useDispatch } from "react-redux"
 import { Redirect, useLocation } from 'react-router-dom'
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { IState } from '@/store/types'
 import { asyncRoutes } from '@/router'
 import { AppMain, SubList, Head } from './components'
@@ -21,6 +22,7 @@ const Layout: React.FC = () => {
   const layoutClasses = useLayoutStyles()
   const { pathname } = useLocation()
   const dispatch = useDispatch()
+  const handle = useFullScreenHandle();
 
   const token = useSelector((state: IState) => {
     return state.user.token
@@ -88,31 +90,33 @@ const Layout: React.FC = () => {
   }, [])
   return (
     token ? (
-      <div className={layoutClasses.layoutWrapper}>
-        <Head toogleDrawer={handleDrawerToggle} />
-        <section className={layoutClasses.bodyWrapper}>
-          <Hidden mdUp implementation="css">
-            <Drawer
-              variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: layoutClasses.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}>
+      <FullScreen handle={handle}>
+        <div className={layoutClasses.layoutWrapper}>
+          <Head toogleDrawer={handleDrawerToggle} fullScreenHandle={handle} />
+          <section className={layoutClasses.bodyWrapper}>
+            <Hidden mdUp implementation="css">
+              <Drawer
+                variant="temporary"
+                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                classes={{
+                  paper: layoutClasses.drawerPaper,
+                }}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}>
+                { navbar }
+              </Drawer>
+            </Hidden>
+            <Hidden smDown implementation="css">
               { navbar }
-            </Drawer>
-          </Hidden>
-          <Hidden smDown implementation="css">
-            { navbar }
-          </Hidden>
-          <AppMain/>
-        </section>
-      </div>
-    ) : <Redirect to={`/login?Redirect=${pathname}`} />
+            </Hidden>
+            <AppMain/>
+          </section>
+        </div>
+      </FullScreen>
+    ) : <Redirect to={`/login` + (pathname === '/' ? '' : `?Redirect=${pathname}`)} />
   )
 }
 
