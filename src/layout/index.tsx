@@ -43,7 +43,7 @@ const Layout: React.FC = () => {
   }
 
   const navbar = (
-    <Paper ref={scrollEL} className={layoutClasses.scrollWrapper} variant="outlined" square>
+    <Paper component ref={scrollEL} className={layoutClasses.scrollWrapper} variant="outlined" square>
       <List ref={content} classes={listClasses} className={"nav-wrapper"} component="nav">
         { asyncRoutes.map(route => (
           <SubList
@@ -112,7 +112,7 @@ const Layout: React.FC = () => {
           <AppMain/>
         </section>
       </div>
-    ) : <Redirect to={`/login?Redirect=${pathname}`} />
+    ) : <Redirect to={`/login${pathname === '/' ? '' : '?Redirect=' + pathname}`} />
   )
 }
 
