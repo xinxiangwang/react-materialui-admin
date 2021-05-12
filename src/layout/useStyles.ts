@@ -32,7 +32,7 @@ export const useLayoutStyles = makeStyles({
   },
   scrollWrapper: {
     overflow: 'hidden',
-    height: '100%',
+    height: `calc(100% - ${HEADER_WRAPPER_HEIGHT})`,
     width: NAV_WRAPPER_WIDTH,
     zIndex: 899,
     position: 'relative',

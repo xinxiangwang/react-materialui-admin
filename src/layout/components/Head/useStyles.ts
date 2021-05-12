@@ -25,7 +25,9 @@ export const useHeadStyles = makeStyles((theme: Theme) =>
     logo: {
       fontSize: '26px',
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      color: 'white',
+      fontWeight: 'bold'
     },
     userSetting: {
       height: '100%',
@@ -37,6 +39,51 @@ export const useHeadStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('md')]: {
         display: 'none',
       },
+    },
+    userInfo: {
+      padding: theme.spacing(2),
+      width: '100%',
+      boxSizing: 'border-box'
+    },
+    avatar: {
+      cursor: 'pointer'
+    }
+  })
+)
+
+export const usePoperStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      maxWidth: '240px'
+    }
+  })
+)
+
+export const useNameStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      color: 'rgb(23, 43, 77)'
+    }
+  })
+)
+
+export const useIntroStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      color: 'rgb(107, 119, 140)',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap'
+    }
+  })
+)
+
+export const useFullIconStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      color: 'white',
+      marginRight: theme.spacing(2),
+      cursor: 'pointer'
     }
   })
 )

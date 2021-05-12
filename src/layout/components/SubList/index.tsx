@@ -79,11 +79,11 @@ const SubList: React.FC<SubListProps> = (props) => {
             // hasOneShowingChild(item.children, item, onlyOneChild) &&
             // (!onlyOneChild.children || onlyOneChild.noShowingChildren) ?
             <ListItemLink onClick={closeDrawer} classes={{ ...classes, button: isActive(basePath) }} primary={item.meta?.title} to={resolvePath('', basePath)} >
-              { item.meta?.icon ? <item.meta.icon classes={iconClasses} /> : null }
+              { item.meta?.icon ? <item.meta.icon fontSize="small" classes={iconClasses} /> : null }
             </ListItemLink> :
             <>
               <ListItem classes={classes} button onClick={handleClick}>
-                { item.meta?.icon ? <item.meta.icon classes={iconClasses} /> : null }
+                { item.meta?.icon ? <item.meta.icon fontSize="small" classes={iconClasses} /> : null }
                 <ListItemText primary={item.meta?.title} />
                 { open ? <ExpandMore /> : <ChevronRight /> }
               </ListItem>
