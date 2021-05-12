@@ -16,7 +16,6 @@ import { getUserInfoByToken } from '@/apis/user'
 const Layout: React.FC = () => {
   const theme = useTheme()
   const scrollEL = useRef<HTMLDivElement>(null)
-  const content = useRef<HTMLDivElement>(null)
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const listClasses = useListStyles()
   const layoutClasses = useLayoutStyles()
@@ -34,9 +33,22 @@ const Layout: React.FC = () => {
     scroll?.refresh()
   }
 
+  const scrollInit = () => {
+    if (scrollEL.current) {
+      setScroll(new BScroll(scrollEL.current, {
+        scrollbar: true,
+        probeType: 3,
+        bounce: false,
+        mouseWheel: true,
+        click: true,
+        preventDefault: true
+      }))
+    }
+  }
+
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+    setMobileOpen(!mobileOpen)
+  }
 
   const closeDrawer = () => {
     if (mobileOpen) {
@@ -46,7 +58,7 @@ const Layout: React.FC = () => {
 
   const navbar = (
     <Paper ref={scrollEL} className={layoutClasses.scrollWrapper} variant="outlined" square>
-      <List ref={content} classes={listClasses} className={"nav-wrapper"} component="nav">
+      <List classes={listClasses} className={"nav-wrapper"} component="nav">
         { asyncRoutes.map(route => (
           <SubList
             closeDrawer={closeDrawer}
@@ -78,18 +90,8 @@ const Layout: React.FC = () => {
     }
   }, [token, dispatch])
 
-  useEffect(() => {
-    if (scrollEL.current) {
-      setScroll(new BScroll(scrollEL.current, {
-        scrollbar: true,
-        mouseWheel: true,
-        probeType: 3,
-        bounce: false
-      }))
-    }
-  }, [])
   return (
-    token ? (
+    !token ? (
       <FullScreen handle={handle}>
         <div className={layoutClasses.layoutWrapper}>
           <Head toogleDrawer={handleDrawerToggle} fullScreenHandle={handle} />

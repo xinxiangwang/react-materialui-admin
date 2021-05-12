@@ -1,6 +1,7 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik'
-import { Button, LinearProgress } from '@material-ui/core'
+import { Button, LinearProgress, Grid, Paper, Avatar, Typography, Link } from '@material-ui/core'
+import { LockOutlined  } from '@material-ui/icons'
 import { TextField } from 'formik-material-ui'
 import { useSelector } from 'react-redux'
 import { useLoginStyles } from './useStyles'
@@ -14,7 +15,7 @@ import { getUrlSearchValue } from '@/utils'
 import { IState } from '@/store/types'
 
 const Login: React.FC = () => {
-  const loginClasses = useLoginStyles()
+  const classes = useLoginStyles()
   const dispatch = useDispatch()
   const history = useHistory()
   const { search } = useLocation()
@@ -38,63 +39,97 @@ const Login: React.FC = () => {
       console.log(err)
     }
   }
-
   return (
-    !token ?
+    token ?
     (
-      <div className={loginClasses.login}>
-        <Formik
-          initialValues={{
-            username: '',
-            password: ''
-          }}
-          validate={
-            values => {
-              const errors: Partial<ILoginReq> = {}
-              if (!values.username) {
-                errors.username = 'Required'
-              } else if (values.username.length < 7) {
-                errors.username = 'username length must >= 7'
-              }
-              return errors
-            }
-          }
-          onSubmit={(values, { setSubmitting }) => {
-            handleSubmit(values, setSubmitting)
-            // setTimeout(() => {
-            //   setSubmitting(false)
-            //   alert(JSON.stringify(values, null, 2))
-            // }, 500)
-          }}
-         >
-        {({ submitForm, isSubmitting }) => (
-          <Form autoComplete="off">
-            <Field
-              component={TextField}
-              name="username"
-              label="Username"
-            />
-            <br />
-            <Field 
-              component={TextField}
-              type="password"
-              label="Password"
-              name="password"
-            />
-            <br />
-            {isSubmitting && <LinearProgress />}
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={isSubmitting}
-              onClick={submitForm}
-            >
-              Submit
-            </Button>
-          </Form>
-        )}
-        </Formik>
-      </div>
+      <Grid container component="main" className={classes.root}>
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlined />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <div className={classes.form}>
+              <Formik
+                initialValues={{
+                  username: '',
+                  password: ''
+                }}
+                validate={
+                  values => {
+                    const errors: Partial<ILoginReq> = {}
+                    if (!values.username) {
+                      errors.username = 'Required'
+                    } else if (values.username.length < 7) {
+                      errors.username = 'username length must >= 7'
+                    }
+                    if (!values.password) {
+                      errors.password = 'Required'
+                    } else if (values.password.length < 7) {
+                      errors.password = 'password length must >= 7'
+                    }
+                    return errors
+                  }
+                }
+                onSubmit={(values, { setSubmitting }) => {
+                  handleSubmit(values, setSubmitting)
+                }}
+               >
+              {({ submitForm, isSubmitting }) => (
+                <Form autoComplete="off">
+                  <Field
+                    component={TextField}
+                    name="username"
+                    label="Username"
+                    margin="normal"
+                    variant="outlined"
+                    required
+                    fullWidth
+                  />
+                  <br />
+                  <Field 
+                    component={TextField}
+                    required
+                    fullWidth
+                    type="password"
+                    label="Password"
+                    name="password"
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  <br />
+                  {isSubmitting && <LinearProgress />}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={isSubmitting}
+                    onClick={submitForm}
+                    className={classes.submit}
+                  >
+                    Submit
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      <Link href="#" variant="body2">
+                        Forgot password?
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Link href="#" variant="body2">
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </Form>
+              )}
+              </Formik>
+            </div>
+          </div>
+        </Grid>
+      </Grid>
     ) : <Redirect to="/dashboard" />
   )
 }
