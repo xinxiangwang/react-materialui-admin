@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Hidden, Drawer } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles' 
 import { useSelector, useDispatch } from "react-redux"
@@ -11,7 +11,7 @@ import { getUserInfoByToken } from '@/apis/user'
 
 const Layout: React.FC = () => {
   const theme = useTheme()
-  
+  const childRef = useRef<HTMLDivElement>(null)
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const layoutClasses = useLayoutStyles()
   const { pathname } = useLocation()
@@ -22,12 +22,7 @@ const Layout: React.FC = () => {
   })
 
   const handleDrawerToggle = () => {
-    setMobileOpen(open => {
-      return !open
-    })
-    // setTimeout(() => {
-    //   scroll?.refresh()
-    // }, 500)
+    setMobileOpen(!mobileOpen)
   }
 
   const closeDrawer = () => {
@@ -73,7 +68,7 @@ const Layout: React.FC = () => {
                 ModalProps={{
                   keepMounted: true, // Better open performance on mobile.
                 }}>
-                <Navbar mobileOpen={mobileOpen} closeDrawer={closeDrawer} />
+                <Navbar cref={childRef} mobileOpen={mobileOpen} closeDrawer={closeDrawer} />
               </Drawer>
             </Hidden>
             <Hidden smDown implementation="css">

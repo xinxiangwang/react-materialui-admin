@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useImperativeHandle } from 'react'
 import { Paper, List } from '@material-ui/core'
 import BScroll from 'better-scroll'
 import BScrollConstructor from 'better-scroll'
@@ -11,15 +11,24 @@ import { throttle } from '@/utils'
 interface INavbarProps {
   closeDrawer: () => void
   mobileOpen: boolean
+  cRef?: React.RefObject<HTMLDivElement>
 }
 
 const Navbar:React.FC<INavbarProps> = (props) => {
-  const { closeDrawer, mobileOpen } = props
+  const { closeDrawer, mobileOpen, cRef } = props
   const [scroll, setScroll] = useState<BScrollConstructor>()
   const scrollEL = useRef<HTMLDivElement>(null)
   const scrollContent = useRef<HTMLDivElement>(null)
   const listClasses = useNavStyles()
   const scrollClasses = useSrollStyles(mobileOpen)
+
+  if (cRef) {
+    useImperativeHandle(cRef, () => ({
+      refresh: () => {
+        scroll?.refresh()
+      }
+    }))
+  }
 
   let ro: ResizeObserver
 
@@ -37,7 +46,6 @@ const Navbar:React.FC<INavbarProps> = (props) => {
         ro = new ResizeObserver(
           throttle(() => {
             if (scroll) {
-              console.log('refresh')
               scroll.refresh()
             }
           }, 200)
