@@ -1,53 +1,33 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react'
-import { List, Hidden, Drawer, Paper } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import { Hidden, Drawer } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles' 
-import BScroll from 'better-scroll'
-import BScrollConstructor from 'better-scroll'
 import { useSelector, useDispatch } from "react-redux"
 import { Redirect, useLocation } from 'react-router-dom'
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { IState } from '@/store/types'
-import { asyncRoutes } from '@/router'
-import { AppMain, SubList, Head } from './components'
-import { useListStyles, useLayoutStyles } from './useStyles'
+import { AppMain, Navbar, Head } from './components'
+import { useLayoutStyles } from './useStyles'
 import { setInfo, logOut } from '@/store/actions/user'
 import { getUserInfoByToken } from '@/apis/user'
 
 const Layout: React.FC = () => {
   const theme = useTheme()
-  const scrollEL = useRef<HTMLDivElement>(null)
+  
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const listClasses = useListStyles()
   const layoutClasses = useLayoutStyles()
   const { pathname } = useLocation()
   const dispatch = useDispatch()
-  const handle = useFullScreenHandle();
 
   const token = useSelector((state: IState) => {
     return state.user.token
   })
 
-  const [scroll, setScroll] = useState<BScrollConstructor>()
-
-  const scRefresh = () => {
-    scroll?.refresh()
-  }
-
-  const scrollInit = () => {
-    if (scrollEL.current) {
-      setScroll(new BScroll(scrollEL.current, {
-        scrollbar: true,
-        probeType: 3,
-        bounce: false,
-        mouseWheel: true,
-        click: true,
-        preventDefault: true
-      }))
-    }
-  }
-
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen)
+    setMobileOpen(open => {
+      return !open
+    })
+    // setTimeout(() => {
+    //   scroll?.refresh()
+    // }, 500)
   }
 
   const closeDrawer = () => {
@@ -55,22 +35,6 @@ const Layout: React.FC = () => {
       setMobileOpen(false)
     }
   }
-
-  const navbar = (
-    <Paper ref={scrollEL} className={layoutClasses.scrollWrapper} variant="outlined" square>
-      <List classes={listClasses} className={"nav-wrapper"} component="nav">
-        { asyncRoutes.map(route => (
-          <SubList
-            closeDrawer={closeDrawer}
-            scRefresh={scRefresh}
-            key={route.path}
-            item={route}
-            basePath={route.path} />
-        )) }
-      </List>
-    </Paper>
-  )
-
   
   useEffect(() => {
     if (token) {
@@ -90,11 +54,12 @@ const Layout: React.FC = () => {
     }
   }, [token, dispatch])
 
+  
+
   return (
     !token ? (
-      <FullScreen handle={handle}>
         <div className={layoutClasses.layoutWrapper}>
-          <Head toogleDrawer={handleDrawerToggle} fullScreenHandle={handle} />
+          <Head toogleDrawer={handleDrawerToggle} />
           <section className={layoutClasses.bodyWrapper}>
             <Hidden mdUp implementation="css">
               <Drawer
@@ -108,16 +73,15 @@ const Layout: React.FC = () => {
                 ModalProps={{
                   keepMounted: true, // Better open performance on mobile.
                 }}>
-                { navbar }
+                <Navbar mobileOpen={mobileOpen} closeDrawer={closeDrawer} />
               </Drawer>
             </Hidden>
             <Hidden smDown implementation="css">
-              { navbar }
+              <Navbar mobileOpen={false} closeDrawer={()=> {}} />
             </Hidden>
             <AppMain/>
           </section>
         </div>
-      </FullScreen>
     ) : <Redirect to={`/login` + (pathname === '/' ? '' : `?Redirect=${pathname}`)} />
   )
 }

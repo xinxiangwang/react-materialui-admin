@@ -12,7 +12,7 @@ import { useLocation } from 'react-router-dom'
 import { SubListProps, resolvePath } from './sublist'
 
 const SubList: React.FC<SubListProps> = (props) => {
-  const { item, basePath, scRefresh, openCollapseArr, closeDrawer } = props
+  const { item, basePath, openCollapseArr, closeDrawer } = props
 
   const [open, setOpen] = useState(false)
 
@@ -31,13 +31,8 @@ const SubList: React.FC<SubListProps> = (props) => {
   // }
 
   const handleClick = (): void => {
+    console.log('asd')
     setOpen(!open)
-
-    // open collapse，scroll content height has changed， so refresh better-scroll
-    setTimeout(() => {
-      scRefresh()
-    }, CollapseOpenTime)
-    
   }
 
   const openCollapse = (): void => {
@@ -63,18 +58,14 @@ const SubList: React.FC<SubListProps> = (props) => {
             })
           }
         }
-        setTimeout(() => {
-          scRefresh()
-        }, CollapseOpenTime)
       }
     })()
-  }, [curPath])
-
-  console.log('被渲染')
+  }, [curPath, basePath])
 
   return (
       !item.hidden ?
         <>
+          { (() => { console.log('被渲染'); return null })() }
           { !item.children ?
             // hasOneShowingChild(item.children, item, onlyOneChild) &&
             // (!onlyOneChild.children || onlyOneChild.noShowingChildren) ?
@@ -94,7 +85,6 @@ const SubList: React.FC<SubListProps> = (props) => {
                     item.children?.map((child, index) => (
                       <SubList
                         closeDrawer={closeDrawer}
-                        scRefresh={scRefresh}
                         openCollapseArr={ openCollapseArr ? openCollapseArr.concat(openCollapse) : ([] as Array<() => void>).concat(openCollapse) }
                         key={index}
                         item={child}

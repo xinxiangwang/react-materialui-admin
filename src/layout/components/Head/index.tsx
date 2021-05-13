@@ -3,20 +3,23 @@ import { useHeadStyles, usePoperStyles, useNameStyles, useIntroStyles, useFullIc
 import { Avatar, IconButton, Toolbar, Popover, Paper, Typography, MenuList, MenuItem, Divider } from '@material-ui/core'
 import { Menu as MenuIcon, FullscreenRounded, FullscreenExitRounded } from '@material-ui/icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { FullScreenHandle } from 'react-full-screen'
+import fscreen from 'fscreen'
 import { IState } from '@/store/types'
 import CustomLink from '@/components/CustomLink'
 import { logOut } from '@/store/actions/user'
 
 interface HeadProps {
   toogleDrawer: () => void
-  fullScreenHandle: FullScreenHandle
 }
 
 const Head: React.FC<HeadProps> = (props) => {
-  const { toogleDrawer, fullScreenHandle: { enter, active, exit } } = props
+  const { toogleDrawer } = props
 
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+
+  const [fsc, _] = useState(fscreen)
+
+  const [full, setFull] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -26,9 +29,34 @@ const Head: React.FC<HeadProps> = (props) => {
   const introClasses = useIntroStyles()
   const fullIconClasses = useFullIconStyles()
 
+  const user = useSelector((state: IState) => {
+    return state.user
+  })
+
   const open = Boolean(anchorEl)
 
   const id = open ? 'simple-popover' : undefined
+
+  function handler() {
+    if (fsc.fullscreenElement !== null) {
+      setFull(true)
+    } else {
+      setFull(false)
+    }
+   }
+
+  if (fsc.fullscreenEnabled) {
+    fsc.addEventListener('fullscreenchange', handler, false);
+   }
+
+  const HandleFullClick = () => {
+    if (full) {
+      fsc.exitFullscreen()
+    } else {
+      const body = document.querySelector('body')
+      body && fsc.requestFullscreen(body)
+    }
+  }
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget)
@@ -41,10 +69,7 @@ const Head: React.FC<HeadProps> = (props) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
-
-  const user = useSelector((state: IState) => {
-    return state.user
-  })
+  
   return (
     <header className={classes.headerWrapper}>
       <Toolbar className={classes.root}>
@@ -61,7 +86,7 @@ const Head: React.FC<HeadProps> = (props) => {
           LOGO
         </div>
         <div className={classes.userSetting}>
-          { !active ? <FullscreenRounded classes={fullIconClasses} fontSize="large" onClick={enter} /> : <FullscreenExitRounded classes={fullIconClasses} fontSize="large" onClick={exit} /> }
+          { !full ? <FullscreenRounded classes={fullIconClasses} fontSize="large" onClick={HandleFullClick} /> : <FullscreenExitRounded classes={fullIconClasses} fontSize="large" onClick={HandleFullClick} /> }
           <Popover
             id={id}
             open={open}

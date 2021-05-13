@@ -6,11 +6,6 @@ export interface SubListProps {
   item: RoutesConfig
   basePath: string
   /**
-   * better-scroll refresh
-   */
-  scRefresh: () => void
-
-  /**
    * all parent components' Collapse open method
    */
   openCollapseArr?: Array<() => void>
