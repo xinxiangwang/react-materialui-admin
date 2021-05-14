@@ -11,24 +11,25 @@ import { throttle } from '@/utils'
 interface INavbarProps {
   closeDrawer: () => void
   mobileOpen: boolean
-  cRef?: React.RefObject<HTMLDivElement>
 }
 
-const Navbar:React.FC<INavbarProps> = (props) => {
-  const { closeDrawer, mobileOpen, cRef } = props
+export interface INavBarFunc {
+  refresh: () => void
+}
+
+const Navbar = React.forwardRef<INavBarFunc, INavbarProps>((props, ref) => {
+  const { closeDrawer, mobileOpen } = props
   const [scroll, setScroll] = useState<BScrollConstructor>()
   const scrollEL = useRef<HTMLDivElement>(null)
   const scrollContent = useRef<HTMLDivElement>(null)
   const listClasses = useNavStyles()
   const scrollClasses = useSrollStyles(mobileOpen)
 
-  if (cRef) {
-    useImperativeHandle(cRef, () => ({
-      refresh: () => {
-        scroll?.refresh()
-      }
-    }))
-  }
+  useImperativeHandle(ref, () => ({
+    refresh: () => {
+      scroll?.refresh()
+    }
+  }))
 
   let ro: ResizeObserver
 
@@ -71,6 +72,6 @@ const Navbar:React.FC<INavbarProps> = (props) => {
       </List>
     </Paper>
   )
-}
+})
 
 export default Navbar

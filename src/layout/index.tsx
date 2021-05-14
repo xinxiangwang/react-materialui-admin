@@ -5,13 +5,14 @@ import { useSelector, useDispatch } from "react-redux"
 import { Redirect, useLocation } from 'react-router-dom'
 import { IState } from '@/store/types'
 import { AppMain, Navbar, Head } from './components'
+import { INavBarFunc } from './components/Navbar'
 import { useLayoutStyles } from './useStyles'
 import { setInfo, logOut } from '@/store/actions/user'
 import { getUserInfoByToken } from '@/apis/user'
 
 const Layout: React.FC = () => {
   const theme = useTheme()
-  const childRef = useRef<HTMLDivElement>(null)
+  const childRef = useRef<INavBarFunc>(null)
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const layoutClasses = useLayoutStyles()
   const { pathname } = useLocation()
@@ -23,6 +24,11 @@ const Layout: React.FC = () => {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
+
+    // fixed scrollbar can't scroll to the bottom when open drawer
+    setTimeout(() => {
+      childRef.current?.refresh()
+    }, 300)
   }
 
   const closeDrawer = () => {
@@ -30,7 +36,7 @@ const Layout: React.FC = () => {
       setMobileOpen(false)
     }
   }
-  
+
   useEffect(() => {
     if (token) {
       getUserInfoByToken({ token }).then(res => {
@@ -68,7 +74,7 @@ const Layout: React.FC = () => {
                 ModalProps={{
                   keepMounted: true, // Better open performance on mobile.
                 }}>
-                <Navbar cref={childRef} mobileOpen={mobileOpen} closeDrawer={closeDrawer} />
+                <Navbar ref={childRef} mobileOpen={mobileOpen} closeDrawer={closeDrawer} />
               </Drawer>
             </Hidden>
             <Hidden smDown implementation="css">
