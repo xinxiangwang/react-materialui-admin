@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {  } from 'react'
+import PanelGroup from './PanelGroup'
+import LineChart from './LineChart'
 
-export default function Dashboard() {
-  console.log('dashboard被渲染')
+const Dashboard: React.FC = () => {
   return (
-    <div>
-      dashboard
-    </div>
+    <>
+      <PanelGroup />
+      <LineChart />
+    </>
   )
 }
+
+export default Dashboard
