@@ -10,7 +10,7 @@ export const useHeadStyles = makeStyles((theme: Theme) =>
     },
     headerWrapper: {
       width: '100%',
-      backgroundColor: 'rgb(86, 100, 210)',
+      backgroundColor: theme.palette.primary.main,
       position: 'fixed',
       top: 0,
       left: 'auto',

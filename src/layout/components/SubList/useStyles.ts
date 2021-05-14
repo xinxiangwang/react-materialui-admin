@@ -1,12 +1,12 @@
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-export const useListItemStyles = makeStyles(() =>
+export const useListItemStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       borderRadius: 12,
       transition: 'color linear',
       "&.active": {
-        color: 'rgb(86, 100, 210)',
+        color: theme.palette.primary.main
       },
       "&.active span": {
         fontWeight: 700

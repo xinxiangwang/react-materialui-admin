@@ -58,31 +58,31 @@ const Layout: React.FC = () => {
   
 
   return (
-    !token ? (
-        <div className={layoutClasses.layoutWrapper}>
-          <Head toogleDrawer={handleDrawerToggle} />
-          <section className={layoutClasses.bodyWrapper}>
-            <Hidden mdUp implementation="css">
-              <Drawer
-                variant="temporary"
-                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                classes={{
-                  paper: layoutClasses.drawerPaper,
-                }}
-                ModalProps={{
-                  keepMounted: true, // Better open performance on mobile.
-                }}>
-                <Navbar ref={childRef} mobileOpen={mobileOpen} closeDrawer={closeDrawer} />
-              </Drawer>
-            </Hidden>
-            <Hidden smDown implementation="css">
-              <Navbar mobileOpen={false} closeDrawer={()=> {}} />
-            </Hidden>
-            <AppMain/>
-          </section>
-        </div>
+    token ? (
+      <div className={layoutClasses.layoutWrapper}>
+        <Head toogleDrawer={handleDrawerToggle} />
+        <section className={layoutClasses.bodyWrapper}>
+          <Hidden mdUp implementation="css">
+            <Drawer
+              variant="temporary"
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              classes={{
+                paper: layoutClasses.drawerPaper,
+              }}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}>
+              <Navbar ref={childRef} mobileOpen={mobileOpen} closeDrawer={closeDrawer} />
+            </Drawer>
+          </Hidden>
+          <Hidden smDown implementation="css">
+            <Navbar mobileOpen={false} closeDrawer={()=> {}} />
+          </Hidden>
+          <AppMain/>
+        </section>
+      </div>
     ) : <Redirect to={`/login` + (pathname === '/' ? '' : `?Redirect=${pathname}`)} />
   )
 }

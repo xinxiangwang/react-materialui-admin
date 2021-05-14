@@ -17,8 +17,6 @@ const Head: React.FC<HeadProps> = (props) => {
 
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
 
-  const [fsc, _] = useState(fscreen)
-
   const [full, setFull] = useState(false)
 
   const dispatch = useDispatch()
@@ -38,23 +36,23 @@ const Head: React.FC<HeadProps> = (props) => {
   const id = open ? 'simple-popover' : undefined
 
   function handler() {
-    if (fsc.fullscreenElement !== null) {
+    if (fscreen.fullscreenElement !== null) {
       setFull(true)
     } else {
       setFull(false)
     }
    }
 
-  if (fsc.fullscreenEnabled) {
-    fsc.addEventListener('fullscreenchange', handler, false);
+  if (fscreen.fullscreenEnabled) {
+    fscreen.addEventListener('fullscreenchange', handler, false);
    }
 
   const HandleFullClick = () => {
     if (full) {
-      fsc.exitFullscreen()
+      fscreen.exitFullscreen()
     } else {
       const body = document.querySelector('body')
-      body && fsc.requestFullscreen(body)
+      body && fscreen.requestFullscreen(body)
     }
   }
 

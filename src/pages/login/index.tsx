@@ -40,7 +40,7 @@ const Login: React.FC = () => {
     }
   }
   return (
-    token ?
+    !token ?
     (
       <Grid container component="main" className={classes.root}>
         <Grid item xs={false} sm={4} md={7} className={classes.image} />

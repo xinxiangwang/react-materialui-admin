@@ -17,15 +17,15 @@ export const useLoginStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(8, 4),
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     avatar: {
       margin: theme.spacing(1),
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main
     },
     form: {
       width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(1)
     },
     submit: {
       width: '100%',

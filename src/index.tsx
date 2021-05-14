@@ -8,10 +8,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { purple } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   shape: {
     borderRadius: 12
+  },
+  palette: {
+    primary: {
+      main: purple[500]
+    }
   }
 })
 
