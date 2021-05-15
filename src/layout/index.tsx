@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { Hidden, Drawer } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles' 
 import { useSelector, useDispatch } from "react-redux"
@@ -22,20 +22,18 @@ const Layout: React.FC = () => {
     return state.user.token
   })
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen)
+  const handleDrawerToggle = useCallback(() => {
+    setMobileOpen(open => !open)
 
     // fixed scrollbar can't scroll to the bottom when open drawer
     setTimeout(() => {
       childRef.current?.refresh()
     }, 300)
-  }
+  }, [])
 
-  const closeDrawer = () => {
-    if (mobileOpen) {
-      setMobileOpen(false)
-    }
-  }
+  const closeDrawer = useCallback(() => {
+    setMobileOpen(false)
+  }, [])
 
   useEffect(() => {
     if (token) {

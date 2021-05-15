@@ -101,4 +101,4 @@ const SubList: React.FC<SubListProps> = (props) => {
   )
 }
 
-export default SubList
+export default React.memo(SubList)

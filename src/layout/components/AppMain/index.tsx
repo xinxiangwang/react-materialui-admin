@@ -65,4 +65,4 @@ const AppMain: React.FC = () => {
   )
 }
 
-export default AppMain
+export default React.memo(AppMain)
