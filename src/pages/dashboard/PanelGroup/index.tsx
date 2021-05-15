@@ -8,14 +8,15 @@ const PanemGroup: React.FC = () => {
   const panelClasses = usePanelStyles()
   const { state, dispatch } = useContext(DashboardContext)
   const handleClick = (key: LineKey) => {
-    dispatch({
-      type: SET_ACTIVE,
-      payload: {
-        activeLineKey: key
-      }
-    })
+    if (key !== state.activeLineKey) {
+      dispatch({
+        type: SET_ACTIVE,
+        payload: {
+          activeLineKey: key
+        }
+      })
+    }
   }
-  console.log(state)
   return (
     <Grid container spacing={3} direction="row" justify="space-between">
       <Grid item lg={3} xs={12} sm={6}>
