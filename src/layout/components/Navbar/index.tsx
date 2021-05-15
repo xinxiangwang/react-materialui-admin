@@ -30,8 +30,7 @@ const Navbar = React.forwardRef<INavBarFunc, INavbarProps>((props, ref) => {
       scroll?.refresh()
     }
   }))
-
-  let ro: ResizeObserver
+  const ro = useRef<ResizeObserver>()
 
   useEffect(() => {
     setScroll(scroll => {
@@ -44,19 +43,19 @@ const Navbar = React.forwardRef<INavBarFunc, INavbarProps>((props, ref) => {
           click: true,
           preventDefault: true
         })
-        ro = new ResizeObserver(
+        ro.current = new ResizeObserver(
           throttle(() => {
             if (scroll) {
               scroll.refresh()
             }
           }, 200)
         )
-        scrollContent.current && ro.observe(scrollContent.current)
+        scrollContent.current && ro.current.observe(scrollContent.current)
         return scroll
       }
     })
     return () => {
-      scrollContent.current && ro.unobserve(scrollContent.current)
+      scrollContent.current && ro.current && ro.current.unobserve(scrollContent.current)
     }
   }, [])
   return (

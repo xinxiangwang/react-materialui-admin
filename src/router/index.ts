@@ -5,7 +5,7 @@ import Profile from '@/pages/profile'
 import MyAccount from '@/pages/my-account'
 import NotFound from '@/pages/404'
 import Login from '@/pages/login'
-import { RouteComponentProps, Redirect } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import { LineStyle, SvgIconComponent, Dashboard as DashboardIcon } from '@material-ui/icons'
 
 interface MetaInfo {

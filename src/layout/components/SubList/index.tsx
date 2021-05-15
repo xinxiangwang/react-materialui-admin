@@ -30,16 +30,17 @@ const SubList: React.FC<SubListProps> = (props) => {
   //   noShowingChildren: true
   // }
 
-  const handleClick = (): void => {
+  const handleClick = () => {
     console.log('asd')
     setOpen(!open)
   }
 
-  const openCollapse = (): void => {
+  const openCollapse = () => {
     setOpen(true)
   }
+  
 
-  const isActive = (path: string): string => {
+  const isActive = (path: string) => {
     return curPath === path ? 'active' : ''
   }
 
