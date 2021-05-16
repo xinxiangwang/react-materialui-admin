@@ -58,7 +58,7 @@ const asyncRoutes: Array<RoutesConfig> = [
     children: [
       {
         path: 'menu1',
-        roles: ['admin'],
+        roles: ['editor'],
         component: menu1,
         exact: true,
         meta: {
@@ -70,6 +70,7 @@ const asyncRoutes: Array<RoutesConfig> = [
             path: 'menu1-1',
             component: menu1_1,
             exact: true,
+            roles: ['zzz'],
             meta: {
               title: 'menu1',
               icon: LineStyle
@@ -79,6 +80,7 @@ const asyncRoutes: Array<RoutesConfig> = [
                 path: 'menu1-1-1/:id',
                 component: menu1_1,
                 exact: true,
+                roles: ['aaa'],
                 meta: {
                   title: 'menu1',
                   icon: LineStyle
@@ -88,6 +90,7 @@ const asyncRoutes: Array<RoutesConfig> = [
               {
                 path: 'menu1-1-2',
                 exact: true,
+                roles: ['bbb'],
                 component: menu1_2,
                 meta: {
                   title: 'menu1-1-2',
