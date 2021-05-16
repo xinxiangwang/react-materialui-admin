@@ -1,10 +1,16 @@
 import Layout from '@/layout'
-import Dashboard from '@/pages/dashboard'
-import { menu1_1, menu1_2, menu1_3, menu2, menu1 } from '@/pages/nested'
-import Profile from '@/pages/profile'
-import MyAccount from '@/pages/my-account'
-import NotFound from '@/pages/404'
-import Login from '@/pages/login'
+import { 
+  Dashboard,
+  Profile,
+  MyAccount,
+  NotFound,
+  Login,
+  menu1_1,
+  menu1_2,
+  menu1_3,
+  menu2,
+  menu1
+} from '@/pages'
 import { RouteComponentProps } from 'react-router-dom'
 import { LineStyle, SvgIconComponent, Dashboard as DashboardIcon } from '@material-ui/icons'
 
