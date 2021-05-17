@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Route } from 'react-router-dom'
 import { asyncRoutes } from '@/router'
 import routesFlat from '@/utils/routesFalt'
 import { useMainStyles } from './useStyles'
+import LazyLoading from '@/components/LazyLoading'
 
 // interface INestedRoutesProps {
 //   child: RoutesConfig
@@ -50,17 +51,20 @@ const AppMain: React.FC = () => {
   const classes = useMainStyles()
   return (
     <div className={classes.appMain}>
-      { routes.map((route, i) => (
-        <Route
-          key={route.key || i}
-          path={route.path}
-          exact={route.exact}
-          strict={route.strict}
-          render={(props) => (
-            route.component ? <route.component {...props} /> : null
-          )}
-        />
-      )) }
+      <Suspense fallback={<LazyLoading />}>
+
+        { routes.map((route, i) => (
+          <Route
+            key={route.key || i}
+            path={route.path}
+            exact={route.exact}
+            strict={route.strict}
+            render={(props) => (
+              route.component ? <route.component {...props} /> : null
+            )}
+          />
+        )) }
+      </Suspense>
     </div>
   )
 }
