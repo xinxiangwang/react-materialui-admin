@@ -102,7 +102,7 @@ const Head: React.FC<HeadProps> = (props) => {
           >
             <Paper classes={poperClasses} variant="outlined">
               <div className={classes.userInfo}>
-                <Typography classes={nameClasses} variant="subtitle2">{user.name}</Typography>
+                <Typography classes={nameClasses} variant="subtitle2">{user.name}<span>{user.roles}</span></Typography>
                 <Typography title={user.introduction} classes={introClasses} variant="subtitle2">{user.introduction}</Typography>
               </div>
               <Divider />

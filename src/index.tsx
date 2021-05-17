@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css'
 import './index.scss';
@@ -8,7 +8,8 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import { purple } from '@material-ui/core/colors';
+import { purple } from '@material-ui/core/colors'
+import LazyLoading from '@/components/LazyLoading'
 
 const theme = createMuiTheme({
   shape: {
@@ -26,7 +27,9 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <App />
+          <Suspense fallback={<LazyLoading />}>
+            <App />
+          </Suspense>
         </ThemeProvider>
       </BrowserRouter>
     </Provider>

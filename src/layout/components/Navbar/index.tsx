@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState, useImperativeHandle } from 'react'
-import { Paper, List } from '@material-ui/core'
+import { Paper, List, debounce } from '@material-ui/core'
 import BScroll from 'better-scroll'
 import BScrollConstructor from 'better-scroll'
 import ResizeObserver from 'resize-observer-polyfill'
-import { asyncRoutes } from '@/router'
+import { useSelector } from 'react-redux'
 import { SubList } from '../index'
 import { useNavStyles, useSrollStyles } from './useStyles'
-import { throttle } from '@/utils'
+import { IState } from '@/store/types'
 
 interface INavbarProps {
   closeDrawer: () => void
@@ -24,6 +24,10 @@ const Navbar = React.forwardRef<INavBarFunc, INavbarProps>((props, ref) => {
   const scrollContent = useRef<HTMLDivElement>(null)
   const listClasses = useNavStyles()
   const scrollClasses = useSrollStyles(mobileOpen)
+
+  const permission = useSelector((state: IState) => {
+    return state.permission
+  })
 
   useImperativeHandle(ref, () => ({
     refresh: () => {
@@ -44,7 +48,7 @@ const Navbar = React.forwardRef<INavBarFunc, INavbarProps>((props, ref) => {
           preventDefault: true
         })
         ro.current = new ResizeObserver(
-          throttle(() => {
+          debounce(() => {
             if (scroll) {
               scroll.refresh()
             }
@@ -61,7 +65,7 @@ const Navbar = React.forwardRef<INavBarFunc, INavbarProps>((props, ref) => {
   return (
     <Paper ref={scrollEL} className={scrollClasses.scrollWrapper} variant="outlined" square>
       <List ref={scrollContent} classes={listClasses} className={"nav-wrapper"} component="nav">
-        { asyncRoutes.map(route => (
+        { permission.map(route => (
           <SubList
             closeDrawer={closeDrawer}
             key={route.path}

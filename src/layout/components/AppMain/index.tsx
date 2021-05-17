@@ -1,9 +1,11 @@
-import React, { Suspense } from 'react'
-import { Route } from 'react-router-dom'
+import React from 'react'
+import { Route, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { asyncRoutes } from '@/router'
 import routesFlat from '@/utils/routesFalt'
 import { useMainStyles } from './useStyles'
-import LazyLoading from '@/components/LazyLoading'
+import { IState } from '@/store/types'
+import { hasPermission } from '@/utils/permission'
 
 // interface INestedRoutesProps {
 //   child: RoutesConfig
@@ -48,10 +50,11 @@ import LazyLoading from '@/components/LazyLoading'
 const AppMain: React.FC = () => {
   const routes = routesFlat(asyncRoutes)
 
+  const user = useSelector((state: IState) => state.user)
+
   const classes = useMainStyles()
   return (
     <div className={classes.appMain}>
-      <Suspense fallback={<LazyLoading />}>
 
         { routes.map((route, i) => (
           <Route
@@ -59,12 +62,15 @@ const AppMain: React.FC = () => {
             path={route.path}
             exact={route.exact}
             strict={route.strict}
-            render={(props) => (
-              route.component ? <route.component {...props} /> : null
-            )}
+            render={(props) => {
+              if (hasPermission(user.roles || [], route)) {
+                return route.component ? <route.component {...props} /> : null
+              } else {
+                return <Redirect to="/404" />
+              }
+            }}
           />
         )) }
-      </Suspense>
     </div>
   )
 }

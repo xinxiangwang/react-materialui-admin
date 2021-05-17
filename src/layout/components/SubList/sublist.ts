@@ -1,5 +1,5 @@
 import { isExternal } from '@/utils/validate'
-import { RoutesConfig } from '@/router'
+import { RoutesConfig } from '@/router/types'
 import path from 'path'
 
 export interface SubListProps {

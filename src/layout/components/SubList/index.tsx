@@ -31,7 +31,6 @@ const SubList: React.FC<SubListProps> = (props) => {
   // }
 
   const handleClick = () => {
-    console.log('asd')
     setOpen(!open)
   }
 

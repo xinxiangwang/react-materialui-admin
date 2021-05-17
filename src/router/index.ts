@@ -9,29 +9,12 @@ import {
   menu1_2,
   menu1_3,
   menu2,
-  menu1
+  menu1,
+  Permission
 } from '@/pages'
-import { RouteComponentProps } from 'react-router-dom'
-import { LineStyle, SvgIconComponent, Dashboard as DashboardIcon } from '@material-ui/icons'
 
-interface MetaInfo {
-  title?: string
-  icon?: string | SvgIconComponent
-  breadcrum?: boolean
-  activeMenu?: string
-}
-
-export interface RoutesConfig {
-  key?: string | number
-  meta?: MetaInfo
-  path: string
-  exact?: boolean
-  strict?: boolean
-  component?: React.ComponentType<RouteComponentProps>
-  children?: Array<RoutesConfig>
-  roles?: Array<string>
-  hidden?: boolean
-}
+import { LineStyle, Dashboard as DashboardIcon } from '@material-ui/icons'
+import { RoutesConfig } from './types'
 
 const asyncRoutes: Array<RoutesConfig> = [
   {
@@ -131,6 +114,29 @@ const asyncRoutes: Array<RoutesConfig> = [
         meta: {
           title: 'menu2'
         }
+      }
+    ]
+  },
+  {
+    path: '/permission',
+    meta: {
+      title: 'Permission'
+    },
+    children: [
+      {
+        path: 'page',
+        component: Permission,
+        meta: {
+          title: 'Page Permission'
+        },
+        roles: ['admin']
+      },
+      {
+        path: 'directive',
+        meta: {
+          title: 'Directive Permission'
+        },
+        roles: ['editor']
       }
     ]
   }

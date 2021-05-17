@@ -5,6 +5,7 @@ const Profile = lazy(() => import('./profile'))
 const MyAccount = lazy(() => import('./my-account'))
 const NotFound = lazy(() => import('./404'))
 const Login = lazy(() => import('./login'))
+const Permission = lazy(() => import('./permission'))
 export {
   Dashboard,
   Profile,
@@ -15,5 +16,6 @@ export {
   menu1_2,
   menu1_3,
   menu2,
-  menu1
+  menu1,
+  Permission
 }

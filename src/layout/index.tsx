@@ -1,22 +1,35 @@
-import React, { useCallback, useEffect, useRef } from 'react'
-import { Hidden, Drawer } from '@material-ui/core'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Hidden, Drawer, Backdrop, CircularProgress } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles' 
 import { useSelector, useDispatch } from "react-redux"
 import { Redirect, useLocation } from 'react-router-dom'
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { IState } from '@/store/types'
 import { AppMain, Navbar, Head } from './components'
 import { INavBarFunc } from './components/Navbar'
 import { useLayoutStyles } from './useStyles'
 import { setInfo, logOut } from '@/store/actions/user'
 import { getUserInfoByToken } from '@/apis/user'
+import { setRoutes } from '@/store/actions/permission'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      backgroundColor: 'rgba(255, 255, 255, 0.7)'
+    },
+  }),
+);
 
 const Layout: React.FC = () => {
+  const classes = useStyles()
   const theme = useTheme()
   const childRef = useRef<INavBarFunc>(null)
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const layoutClasses = useLayoutStyles()
   const { pathname } = useLocation()
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true)
 
   const token = useSelector((state: IState) => {
     return state.user.token
@@ -44,11 +57,14 @@ const Layout: React.FC = () => {
             token,
             ...res.data
           }))
+          dispatch(setRoutes(res.data.roles))
         } else {
           throw new Error()
         }
       }).catch(err => {
         dispatch(logOut())
+      }).finally(() => {
+        setLoading(false)
       })
     }
   }, [token, dispatch])
@@ -58,6 +74,7 @@ const Layout: React.FC = () => {
   return (
     token ? (
       <div className={layoutClasses.layoutWrapper}>
+        <Backdrop className={classes.backdrop} open={loading} ><CircularProgress /></Backdrop>
         <Head toogleDrawer={handleDrawerToggle} />
         <section className={layoutClasses.bodyWrapper}>
           <Hidden mdUp implementation="css">
