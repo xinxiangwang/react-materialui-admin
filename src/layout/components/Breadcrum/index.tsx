@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
+      marginBottom: theme.spacing(1)
     },
     lists: {
       backgroundColor: theme.palette.background.paper,
-      marginTop: theme.spacing(1),
     },
     nested: {
       paddingLeft: theme.spacing(4),
