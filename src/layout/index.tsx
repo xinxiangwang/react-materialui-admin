@@ -74,7 +74,7 @@ const Layout: React.FC = () => {
   return (
     token ? (
       <div className={layoutClasses.layoutWrapper}>
-        <Backdrop className={classes.backdrop} open={loading} ><CircularProgress /></Backdrop>
+        {/* <Backdrop className={classes.backdrop} open={loading} ><CircularProgress /></Backdrop> */}
         <Head toogleDrawer={handleDrawerToggle} />
         <section className={layoutClasses.bodyWrapper}>
           <Hidden mdUp implementation="css">

@@ -7,7 +7,8 @@ export const useMainStyles = makeStyles((theme: Theme) =>
       flexBasis: 'auto',
       boxSizing: 'border-box',
       padding: theme.spacing(2),
-      overflowY: 'auto'
+      overflowY: 'auto',
+      position: 'relative'
     }
   })
 )

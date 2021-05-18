@@ -10,7 +10,9 @@ import {
   menu1_3,
   menu2,
   menu1,
-  Permission
+  Permission,
+  PermissionTwo,
+  EditTable
 } from '@/pages'
 
 import { LineStyle, Dashboard as DashboardIcon } from '@material-ui/icons'
@@ -20,7 +22,6 @@ const asyncRoutes: Array<RoutesConfig> = [
   {
     path: '/dashboard',
     component: Dashboard,
-    roles: ['admin'],
     meta: {
       title: 'dashboard',
       icon: DashboardIcon
@@ -29,12 +30,18 @@ const asyncRoutes: Array<RoutesConfig> = [
   {
     path: '/profile',
     component: Profile,
-    hidden: true
+    hidden: true,
+    meta: {
+      title: 'profile'
+    },
   },
   {
     path: '/account',
     component: MyAccount,
-    hidden: true
+    hidden: true,
+    meta: {
+      title: 'account'
+    }
   },
   {
     path: '/nested',
@@ -48,7 +55,6 @@ const asyncRoutes: Array<RoutesConfig> = [
       {
         path: 'menu1',
         roles: ['editor'],
-        component: menu1,
         exact: true,
         meta: {
           title: 'menu1_1',
@@ -57,29 +63,14 @@ const asyncRoutes: Array<RoutesConfig> = [
         children: [
           {
             path: 'menu1-1',
-            component: menu1_1,
-            exact: true,
-            roles: ['zzz'],
             meta: {
               title: 'menu1',
               icon: LineStyle
             },
             children: [
               {
-                path: 'menu1-1-1/:id',
-                component: menu1_1,
-                exact: true,
-                roles: ['aaa'],
-                meta: {
-                  title: 'menu1',
-                  icon: LineStyle
-                },
-                hidden: true
-              },
-              {
                 path: 'menu1-1-2',
                 exact: true,
-                roles: ['bbb'],
                 component: menu1_2,
                 meta: {
                   title: 'menu1-1-2',
@@ -132,13 +123,20 @@ const asyncRoutes: Array<RoutesConfig> = [
         roles: ['admin']
       },
       {
-        path: 'directive',
+        path: 'page2',
+        component: PermissionTwo,
         meta: {
-          title: 'Directive Permission'
-        },
-        roles: ['editor']
+          title: 'Page Permission'
+        }
       }
     ]
+  },
+  {
+    path: '/editTable',
+    meta: {
+      title: 'EditTable'
+    },
+    component: EditTable
   }
 ]
 
