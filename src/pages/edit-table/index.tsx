@@ -34,13 +34,20 @@ export default function BasicTable() {
 
   const [curRow, setCurRow] = useState<IRows | null>()
 
-  const handleClick = (row: IRows) => {
+  const [curEditIndex, setCurEditIndex] = useState(-1)
+
+  const handleClick = (row: IRows, i: number) => {
     setCurRow(row)
     setOpen(true)
+    setCurEditIndex(i)
   }
 
   const handleSubmit: onFormikSubmit = (values, options) => {
-    console.log(values)
+    rows[curEditIndex] = values
+    const { setSubmitting } = options
+    setSubmitting(false)
+    setOpen(false)
+
   }
   return (
     <>
@@ -57,7 +64,7 @@ export default function BasicTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row, index) => (
               <TableRow key={row.name}>
                 <TableCell component="th" scope="row">
                   {row.name}
@@ -67,7 +74,7 @@ export default function BasicTable() {
                 <TableCell align="right">{row.carbs}</TableCell>
                 <TableCell align="right">{row.protein}</TableCell>
                 <TableCell align="right">
-                  <Button onClick={() => handleClick(row)} variant="contained" size="small" color="primary">
+                  <Button onClick={() => handleClick(row, index)} variant="contained" size="small" color="primary">
                     edit
                   </Button>
                 </TableCell>
