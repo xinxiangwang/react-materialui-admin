@@ -5,11 +5,9 @@ import {
   MyAccount,
   NotFound,
   Login,
-  menu1_1,
   menu1_2,
   menu1_3,
   menu2,
-  menu1,
   Permission,
   PermissionTwo,
   EditTable

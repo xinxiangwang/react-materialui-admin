@@ -55,8 +55,8 @@ const Login: React.FC = () => {
             <div className={classes.form}>
               <Formik
                 initialValues={{
-                  username: '',
-                  password: ''
+                  username: 'whatever',
+                  password: '1234651'
                 }}
                 validate={
                   values => {

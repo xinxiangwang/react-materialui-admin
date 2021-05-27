@@ -2,7 +2,7 @@ import permission from '../../actions/permission/actionType'
 import { asyncRoutes } from '@/router'
 import { ISetRouteAction } from '../../types/permission'
 import { RoutesConfig } from '@/router/types'
-import { hasPermission, filterAsyncRoutes } from '@/utils/permission'
+import { filterAsyncRoutes } from '@/utils/permission'
 
 type AR = Array<RoutesConfig>
 

@@ -89,7 +89,7 @@ const RaddarChart: React.FC = () => {
           animationDuration
         }]
       })
-      var resizeHandler = debounce(() => {
+      var resizeHandler =debounce(() => {
         chart.resize()
       }, 100)
       window.addEventListener('resize', resizeHandler)
@@ -97,7 +97,7 @@ const RaddarChart: React.FC = () => {
     return () => {
       window.removeEventListener('resize', resizeHandler)
     }
-  }, [chartData, chartEl.current])
+  }, [chartData])
   return (
     <Paper className={chartClasses.chart} ref={chartEl}></Paper>
   )

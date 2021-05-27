@@ -62,7 +62,7 @@ const PieChart: React.FC = () => {
     return () => {
       window.removeEventListener('resize', resizeHandler)
     }
-  }, [chartData, chartEl.current])
+  }, [chartData])
   return (
     <Paper className={chartClasses.chart} ref={chartEl}></Paper>
   )

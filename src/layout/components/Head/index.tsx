@@ -70,7 +70,6 @@ const Head: React.FC<HeadProps> = (props) => {
   
   return (
     <header className={classes.headerWrapper}>
-      { (() => { console.log('head被渲染'); return null })() }
       <Toolbar className={classes.root}>
         <IconButton
           color="inherit"

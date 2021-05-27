@@ -65,7 +65,6 @@ const SubList: React.FC<SubListProps> = (props) => {
   return (
       !item.hidden ?
         <>
-          { (() => { console.log('被渲染'); return null })() }
           { !item.children ?
             // hasOneShowingChild(item.children, item, onlyOneChild) &&
             // (!onlyOneChild.children || onlyOneChild.noShowingChildren) ?

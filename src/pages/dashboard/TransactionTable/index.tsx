@@ -11,9 +11,9 @@ const rows = [
   createData('Eclair', 262, 16.0, 24, 6.0),
   createData('Cupcake', 305, 3.7, 67, 4.3),
   createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9)
+  createData('Gingerbread1', 356, 16.0, 49, 3.9),
+  createData('Gingerbread2', 356, 16.0, 49, 3.9),
+  createData('Gingerbread3', 356, 16.0, 49, 3.9)
 ];
 
 export default function TransactionTable() {
